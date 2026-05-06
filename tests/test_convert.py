@@ -10,12 +10,12 @@ def test_convert_page6_heading_keeps_runtime_compatible_bbox() -> None:
     docling_document = {
         "schema_name": "DoclingDocument",
         "version": "1.10.0",
-        "origin": {"filename": "IAP_Studie_2020.pdf", "binary_hash": 123},
+        "origin": {"filename": "sample_article.pdf", "binary_hash": 123},
         "texts": [
             {
                 "self_ref": "#/texts/46",
                 "label": "section_header",
-                "text": "2.  Selbstführung auf individueller Ebene",
+                "text": "2.  Document Element Recognition",
                 "prov": [
                     {
                         "page_no": 6,
@@ -46,7 +46,7 @@ def test_convert_page6_heading_keeps_runtime_compatible_bbox() -> None:
     assert block["provenance"]["raw_docling_ref"] == "#/texts/46"
     assert block["provenance"]["source_pdf_hash"] == "pending"
 
-    assert block["content"]["text"] == "2.  Selbstführung auf individueller Ebene"
+    assert block["content"]["text"] == "2.  Document Element Recognition"
 
 
 def test_convert_filters_pages_and_maps_picture_to_image() -> None:
