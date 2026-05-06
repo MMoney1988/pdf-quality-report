@@ -1,0 +1,3217 @@
+{
+  "metadata": {
+    "uif_profile": "docling_minimal_scratch_v1",
+    "source_type": "pdf",
+    "source_identifier": "mdpi_pdf_elements.pdf",
+    "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b",
+    "parser_backend": "docling",
+    "docling_schema": "DoclingDocument",
+    "docling_document_version": "1.10.0",
+    "docling_origin_binary_hash": 8079781005089634635,
+    "bbox_unit": "pt",
+    "bbox_coord_origin": "BOTTOMLEFT",
+    "reading_order_strategy": "page_then_top_desc_left_asc",
+    "page_filter": [
+      12
+    ]
+  },
+  "blocks": [
+    {
+      "id": "p12-texts-555",
+      "type": "header",
+      "page_number": 12,
+      "bbox": [
+        76.049,
+        776.7764526707838,
+        154.34715000000003,
+        784.4342939484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/555",
+        "raw_docling_label": "page_header",
+        "raw_docling_charspan": [
+          0,
+          26
+        ],
+        "raw_docling_bbox": {
+          "l": 76.049,
+          "t": 784.4342939484375,
+          "r": 154.34715000000003,
+          "b": 776.7764526707838,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Technologies 2019 , 7 , 65",
+        "spans": []
+      },
+      "reading_order_index": 0
+    },
+    {
+      "id": "p12-texts-556",
+      "type": "header",
+      "page_number": 12,
+      "bbox": [
+        491.80899999999997,
+        776.7764526707838,
+        518.7399679,
+        784.3306826484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/556",
+        "raw_docling_label": "page_header",
+        "raw_docling_charspan": [
+          0,
+          8
+        ],
+        "raw_docling_bbox": {
+          "l": 491.80899999999997,
+          "t": 784.3306826484375,
+          "r": 518.7399679,
+          "b": 776.7764526707838,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "12 of 19",
+        "spans": []
+      },
+      "reading_order_index": 1
+    },
+    {
+      "id": "p12-texts-557",
+      "type": "heading",
+      "page_number": 12,
+      "bbox": [
+        76.53499999999997,
+        741.5462177650579,
+        147.12998360000003,
+        750.9460964484374
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/557",
+        "raw_docling_label": "section_header",
+        "raw_docling_charspan": [
+          0,
+          16
+        ],
+        "raw_docling_bbox": {
+          "l": 76.53499999999997,
+          "t": 750.9460964484374,
+          "r": 147.12998360000003,
+          "b": 741.5462177650579,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "7.1. Methodology",
+        "spans": []
+      },
+      "level": 2,
+      "reading_order_index": 2
+    },
+    {
+      "id": "p12-texts-558",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        76.236,
+        654.3398188719012,
+        520.4809853868,
+        731.3295826484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/558",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          599
+        ],
+        "raw_docling_bbox": {
+          "l": 76.236,
+          "t": 731.3295826484375,
+          "r": 520.4809853868,
+          "b": 654.3398188719012,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "We evaluate our results compared to reproductions of PDFFigures2 and DeepFigures using the code and weights provided by the authors to extract bounding boxes and labels, i.e., identical systems to the ones used by the authors. For our systems, we train each system twice: First, we use the training portion of our corpus and the labels according to the caption-oriented definition system. Second, we use the training portion of our corpus and the labels according to the semantic-oriented definition system. In the evaluation, we use the appropriate version of the weights corresponding to the task.",
+        "spans": []
+      },
+      "reading_order_index": 3
+    },
+    {
+      "id": "p12-texts-559",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        76.535,
+        546.2638188719012,
+        518.9413886719998,
+        650.2725826484376
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/559",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          772
+        ],
+        "raw_docling_bbox": {
+          "l": 76.535,
+          "t": 650.2725826484376,
+          "r": 518.9413886719998,
+          "b": 546.2638188719012,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "To count errors, we find the Intersection over Union (IoU) values of pairs of detected and ground truth bounding boxes. Detected bounding boxes count as correct detections if this value is greater than 0.8. In this respect, our evaluation is identical to the corresponding publications for PDFFigures2 and DeepFigures. To an extent, their chosen criterion for correct detection (IoU > 0.8) is somewhat arbitrary insofar as one may need more accurate detection for our use case. We therefore extended their evaluation to also give some results obtained when varying the correctness threshold by steps of 0.05. In addition, we found some of the provided bounding boxes in the provided data set to be obviously wrong and thus we corrected them where necessary (cf. Figure 5).",
+        "spans": []
+      },
+      "reading_order_index": 4
+    },
+    {
+      "id": "p12-pictures-14",
+      "type": "image",
+      "page_number": 12,
+      "bbox": [
+        182.44418334960938,
+        250.01959228515625,
+        411.7052917480469,
+        534.5392150878906
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/pictures/14",
+        "raw_docling_label": "picture",
+        "raw_docling_charspan": [
+          0,
+          0
+        ],
+        "raw_docling_bbox": {
+          "l": 182.44418334960938,
+          "t": 534.5392150878906,
+          "r": 411.7052917480469,
+          "b": 250.01959228515625,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": null,
+      "base64": null,
+      "reading_order_index": 5
+    },
+    {
+      "id": "p12-texts-561",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        259.3333333333333,
+        516.8900146484375,
+        280.0,
+        523.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/561",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          11
+        ],
+        "raw_docling_bbox": {
+          "l": 259.3333333333333,
+          "t": 523.5566813151042,
+          "r": 280.0,
+          "b": 516.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "May 2, 2011",
+        "spans": []
+      },
+      "reading_order_index": 6
+    },
+    {
+      "id": "p12-texts-563",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        298.6666666666667,
+        517.5566813151042,
+        329.66666666666663,
+        523.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/563",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          15
+        ],
+        "raw_docling_bbox": {
+          "l": 298.6666666666667,
+          "t": 523.2233479817708,
+          "r": 329.66666666666663,
+          "b": 517.5566813151042,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "WSPC/S0218-1274",
+        "spans": []
+      },
+      "reading_order_index": 7
+    },
+    {
+      "id": "p12-texts-562",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        284.6666666666667,
+        517.8900146484375,
+        294.3333333333333,
+        522.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/562",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          5
+        ],
+        "raw_docling_bbox": {
+          "l": 284.6666666666667,
+          "t": 522.8900146484375,
+          "r": 294.3333333333333,
+          "b": 517.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "16:35",
+        "spans": []
+      },
+      "reading_order_index": 8
+    },
+    {
+      "id": "p12-texts-564",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        333.33333333333337,
+        517.5566813151042,
+        344.0,
+        522.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/564",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          5
+        ],
+        "raw_docling_bbox": {
+          "l": 333.33333333333337,
+          "t": 522.5566813151042,
+          "r": 344.0,
+          "b": 517.5566813151042,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "20620",
+        "spans": []
+      },
+      "reading_order_index": 9
+    },
+    {
+      "id": "p12-texts-565",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.33333333333334,
+        488.8900146484375,
+        301.6666666666667,
+        495.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/565",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          48
+        ],
+        "raw_docling_bbox": {
+          "l": 224.33333333333334,
+          "t": 495.8900146484375,
+          "r": 301.6666666666667,
+          "b": 488.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(for a more detailed review, see [Donner et al.,",
+        "spans": []
+      },
+      "reading_order_index": 10
+    },
+    {
+      "id": "p12-texts-566",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        313.0,
+        489.5566813151042,
+        382.33333333333337,
+        495.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/566",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          49
+        ],
+        "raw_docling_bbox": {
+          "l": 313.0,
+          "t": 495.2233479817708,
+          "r": 382.33333333333337,
+          "b": 489.5566813151042,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "vertex with respect to all other vertices, imply-",
+        "spans": []
+      },
+      "reading_order_index": 11
+    },
+    {
+      "id": "p12-texts-568",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        485.2233479817708,
+        382.66666666666663,
+        490.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/568",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          40
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 490.8900146484375,
+          "r": 382.66666666666663,
+          "b": 485.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "ing that high values of closeness can be",
+        "spans": []
+      },
+      "reading_order_index": 12
+    },
+    {
+      "id": "p12-texts-567",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        485.2233479817708,
+        302.0,
+        490.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/567",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          51
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 490.5566813151042,
+          "r": 302.0,
+          "b": 485.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "2010b]). As an example, Fig. 7 shows the trinity of",
+        "spans": []
+      },
+      "reading_order_index": 13
+    },
+    {
+      "id": "p12-texts-570",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.33333333333337,
+        481.2233479817708,
+        382.66666666666663,
+        487.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/570",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          47
+        ],
+        "raw_docling_bbox": {
+          "l": 312.33333333333337,
+          "t": 487.2233479817708,
+          "r": 382.66666666666663,
+          "b": 481.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "expected in the central parts of the attractor,",
+        "spans": []
+      },
+      "reading_order_index": 14
+    },
+    {
+      "id": "p12-texts-569",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.66666666666666,
+        481.2233479817708,
+        301.6666666666667,
+        486.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/569",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          51
+        ],
+        "raw_docling_bbox": {
+          "l": 224.66666666666666,
+          "t": 486.8900146484375,
+          "r": 301.6666666666667,
+          "b": 481.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "centrality measures (degree, closeness and between-",
+        "spans": []
+      },
+      "reading_order_index": 15
+    },
+    {
+      "id": "p12-texts-572",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        313.0,
+        477.2233479817708,
+        382.0,
+        482.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/572",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          44
+        ],
+        "raw_docling_bbox": {
+          "l": 313.0,
+          "t": 482.8900146484375,
+          "r": 382.0,
+          "b": 477.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "whereas the outer parts are characterized by",
+        "spans": []
+      },
+      "reading_order_index": 16
+    },
+    {
+      "id": "p12-texts-571",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        476.8900146484375,
+        302.0,
+        482.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/571",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          53
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 482.5566813151042,
+          "r": 302.0,
+          "b": 476.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "ness [Freeman, 1979]) as well as the local clustering",
+        "spans": []
+      },
+      "reading_order_index": 17
+    },
+    {
+      "id": "p12-texts-573",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.66666666666666,
+        473.2233479817708,
+        301.6666666666667,
+        478.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/573",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          52
+        ],
+        "raw_docling_bbox": {
+          "l": 224.66666666666666,
+          "t": 478.8900146484375,
+          "r": 301.6666666666667,
+          "b": 473.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "coefficient for realizations of the Lorenz system at",
+        "spans": []
+      },
+      "reading_order_index": 18
+    },
+    {
+      "id": "p12-texts-574",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        473.2233479817708,
+        332.66666666666663,
+        478.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/574",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          13
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 478.8900146484375,
+          "r": 332.66666666666663,
+          "b": 473.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "small values.",
+        "spans": []
+      },
+      "reading_order_index": 19
+    },
+    {
+      "id": "p12-texts-576",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        305.33333333333337,
+        469.2233479817708,
+        382.0,
+        474.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/576",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          52
+        ],
+        "raw_docling_bbox": {
+          "l": 305.33333333333337,
+          "t": 474.5566813151042,
+          "r": 382.0,
+          "b": 469.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(ii) The betuweenness centrality b, [Fig. 7(c)] mea-",
+        "spans": []
+      },
+      "reading_order_index": 20
+    },
+    {
+      "id": "p12-texts-575",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        469.2233479817708,
+        288.3333333333333,
+        474.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/575",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          42
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 474.2233479817708,
+          "r": 288.3333333333333,
+          "b": 469.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "various values of the control parameter r:",
+        "spans": []
+      },
+      "reading_order_index": 21
+    },
+    {
+      "id": "p12-texts-577",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        345.0,
+        464.2233479817708,
+        382.66666666666663,
+        471.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/577",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          22
+        ],
+        "raw_docling_bbox": {
+          "l": 345.0,
+          "t": 471.8900146484375,
+          "r": 382.66666666666663,
+          "b": 464.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "shortest paths between",
+        "spans": []
+      },
+      "reading_order_index": 22
+    },
+    {
+      "id": "p12-texts-583",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        347.33333333333337,
+        461.2233479817708,
+        382.33333333333337,
+        466.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/583",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          21
+        ],
+        "raw_docling_bbox": {
+          "l": 347.33333333333337,
+          "t": 466.5566813151042,
+          "r": 382.33333333333337,
+          "b": 461.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "network that traverse",
+        "spans": []
+      },
+      "reading_order_index": 23
+    },
+    {
+      "id": "p12-texts-580",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        461.2233479817708,
+        337.66666666666663,
+        465.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/580",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          17
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 465.5566813151042,
+          "r": 337.66666666666663,
+          "b": 461.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "pairs ol vertices",
+        "spans": []
+      },
+      "reading_order_index": 24
+    },
+    {
+      "id": "p12-texts-581",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        338.0,
+        461.8900146484375,
+        343.33333333333337,
+        464.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/581",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 338.0,
+          "t": 464.5566813151042,
+          "r": 343.33333333333337,
+          "b": 461.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "111",
+        "spans": []
+      },
+      "reading_order_index": 25
+    },
+    {
+      "id": "p12-texts-578",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.66666666666666,
+        457.2233479817708,
+        301.3333333333333,
+        462.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/578",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          47
+        ],
+        "raw_docling_bbox": {
+          "l": 231.66666666666666,
+          "t": 462.5566813151042,
+          "r": 301.3333333333333,
+          "b": 457.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "number of neighbors of a vertex v and is there-",
+        "spans": []
+      },
+      "reading_order_index": 26
+    },
+    {
+      "id": "p12-texts-582",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        345.66666666666663,
+        457.2233479817708,
+        382.0,
+        462.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/582",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          24
+        ],
+        "raw_docling_bbox": {
+          "l": 345.66666666666663,
+          "t": 462.5566813151042,
+          "r": 382.0,
+          "b": 457.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "hence, indicates regions",
+        "spans": []
+      },
+      "reading_order_index": 27
+    },
+    {
+      "id": "p12-texts-579",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.33333333333337,
+        457.2233479817708,
+        344.33333333333337,
+        462.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/579",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          20
+        ],
+        "raw_docling_bbox": {
+          "l": 312.33333333333337,
+          "t": 462.2233479817708,
+          "r": 344.33333333333337,
+          "b": 457.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "a given vertex v and",
+        "spans": []
+      },
+      "reading_order_index": 28
+    },
+    {
+      "id": "p12-texts-584",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.66666666666666,
+        452.8900146484375,
+        301.6666666666667,
+        458.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/584",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          46
+        ],
+        "raw_docling_bbox": {
+          "l": 231.66666666666666,
+          "t": 458.5566813151042,
+          "r": 301.6666666666667,
+          "b": 452.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "fore proportional to the local recurrence rate",
+        "spans": []
+      },
+      "reading_order_index": 29
+    },
+    {
+      "id": "p12-texts-585",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        452.8900146484375,
+        344.33333333333337,
+        458.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/585",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          19
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 458.5566813151042,
+          "r": 344.33333333333337,
+          "b": 452.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "of phase space that",
+        "spans": []
+      },
+      "reading_order_index": 30
+    },
+    {
+      "id": "p12-texts-586",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        345.33333333333337,
+        453.2233479817708,
+        381.66666666666663,
+        458.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/586",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          24
+        ],
+        "raw_docling_bbox": {
+          "l": 345.33333333333337,
+          "t": 458.5566813151042,
+          "r": 381.66666666666663,
+          "b": 453.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Are characterized by low",
+        "spans": []
+      },
+      "reading_order_index": 31
+    },
+    {
+      "id": "p12-texts-587",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.33333333333334,
+        448.2233479817708,
+        302.3333333333333,
+        455.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/587",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          41
+        ],
+        "raw_docling_bbox": {
+          "l": 231.33333333333334,
+          "t": 455.2233479817708,
+          "r": 302.3333333333333,
+          "b": 448.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "RR, and, hene, the phase space density at",
+        "spans": []
+      },
+      "reading_order_index": 32
+    },
+    {
+      "id": "p12-texts-588",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        448.8900146484375,
+        343.66666666666663,
+        454.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/588",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          21
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 454.5566813151042,
+          "r": 343.66666666666663,
+          "b": 448.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "density, but separate",
+        "spans": []
+      },
+      "reading_order_index": 33
+    },
+    {
+      "id": "p12-texts-589",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        347.0,
+        448.8900146484375,
+        382.0,
+        454.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/589",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          24
+        ],
+        "raw_docling_bbox": {
+          "l": 347.0,
+          "t": 454.5566813151042,
+          "r": 382.0,
+          "b": 448.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "egions of higher density",
+        "spans": []
+      },
+      "reading_order_index": 34
+    },
+    {
+      "id": "p12-texts-591",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.33333333333337,
+        445.2233479817708,
+        344.33333333333337,
+        450.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/591",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          20
+        ],
+        "raw_docling_bbox": {
+          "l": 312.33333333333337,
+          "t": 450.5566813151042,
+          "r": 344.33333333333337,
+          "b": 445.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(geometric bottlenec",
+        "spans": []
+      },
+      "reading_order_index": 35
+    },
+    {
+      "id": "p12-texts-592",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        347.33333333333337,
+        445.2233479817708,
+        382.0,
+        450.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/592",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          24
+        ],
+        "raw_docling_bbox": {
+          "l": 347.33333333333337,
+          "t": 450.5566813151042,
+          "r": 382.0,
+          "b": 445.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "[Donner et al., 2010a]).",
+        "spans": []
+      },
+      "reading_order_index": 36
+    },
+    {
+      "id": "p12-texts-590",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.66666666666666,
+        444.8900146484375,
+        292.0,
+        450.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/590",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          39
+        ],
+        "raw_docling_bbox": {
+          "l": 231.66666666666666,
+          "t": 450.2233479817708,
+          "r": 292.0,
+          "b": 444.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "the corresponding point in phase space.",
+        "spans": []
+      },
+      "reading_order_index": 37
+    },
+    {
+      "id": "p12-texts-594",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.33333333333337,
+        440.5566813151042,
+        344.66666666666663,
+        446.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/594",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          21
+        ],
+        "raw_docling_bbox": {
+          "l": 312.33333333333337,
+          "t": 446.8900146484375,
+          "r": 344.66666666666663,
+          "b": 440.5566813151042,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Specifically, high be",
+        "spans": []
+      },
+      "reading_order_index": 38
+    },
+    {
+      "id": "p12-texts-593",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.66666666666666,
+        440.8900146484375,
+        302.0,
+        446.2233479817708
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/593",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          54
+        ],
+        "raw_docling_bbox": {
+          "l": 225.66666666666666,
+          "t": 446.2233479817708,
+          "r": 302.0,
+          "b": 440.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(ii) The closeness centrality c [Fig. 7(d)] is related",
+        "spans": []
+      },
+      "reading_order_index": 39
+    },
+    {
+      "id": "p12-texts-596",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        312.66666666666663,
+        437.2233479817708,
+        344.33333333333337,
+        442.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/596",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          21
+        ],
+        "raw_docling_bbox": {
+          "l": 312.66666666666663,
+          "t": 442.8900146484375,
+          "r": 344.33333333333337,
+          "b": 437.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "a strong local attrac",
+        "spans": []
+      },
+      "reading_order_index": 40
+    },
+    {
+      "id": "p12-texts-595",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.33333333333334,
+        436.8900146484375,
+        302.0,
+        442.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/595",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          41
+        ],
+        "raw_docling_bbox": {
+          "l": 231.33333333333334,
+          "t": 442.5566813151042,
+          "r": 302.0,
+          "b": 436.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "to the inverse mean network distance of a",
+        "spans": []
+      },
+      "reading_order_index": 41
+    },
+    {
+      "id": "p12-texts-597",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        347.0,
+        436.8900146484375,
+        371.0,
+        442.5566813151042
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/597",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          14
+        ],
+        "raw_docling_bbox": {
+          "l": 347.0,
+          "t": 442.5566813151042,
+          "r": 371.0,
+          "b": 436.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "fragmentation.",
+        "spans": []
+      },
+      "reading_order_index": 42
+    },
+    {
+      "id": "p12-texts-598",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        251.33333333333331,
+        427.2233479817708,
+        272.3333333333333,
+        431.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/598",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          17
+        ],
+        "raw_docling_bbox": {
+          "l": 251.33333333333331,
+          "t": 431.8900146484375,
+          "r": 272.3333333333333,
+          "b": 427.2233479817708,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Degree centrality",
+        "spans": []
+      },
+      "reading_order_index": 43
+    },
+    {
+      "id": "p12-texts-600",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        307.0,
+        402.22334798177087,
+        313.0,
+        413.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/600",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          5
+        ],
+        "raw_docling_bbox": {
+          "l": 307.0,
+          "t": 413.8900146484375,
+          "r": 313.0,
+          "b": 402.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(4)60",
+        "spans": []
+      },
+      "reading_order_index": 44
+    },
+    {
+      "id": "p12-texts-599",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.33333333333334,
+        402.8900146484375,
+        230.0,
+        412.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/599",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          6
+        ],
+        "raw_docling_bbox": {
+          "l": 225.33333333333334,
+          "t": 412.8900146484375,
+          "r": 230.0,
+          "b": 402.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(4)60)",
+        "spans": []
+      },
+      "reading_order_index": 45
+    },
+    {
+      "id": "p12-texts-601",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        313.33333333333337,
+        405.22334798177087,
+        318.0,
+        409.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/601",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 313.33333333333337,
+          "t": 409.22334798177087,
+          "r": 318.0,
+          "b": 405.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "0.5",
+        "spans": []
+      },
+      "reading_order_index": 46
+    },
+    {
+      "id": "p12-texts-605",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        350.33333333333337,
+        384.22334798177087,
+        355.33333333333337,
+        388.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/605",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 350.33333333333337,
+          "t": 388.22334798177087,
+          "r": 355.33333333333337,
+          "b": 384.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "225",
+        "spans": []
+      },
+      "reading_order_index": 47
+    },
+    {
+      "id": "p12-texts-604",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        267.6666666666667,
+        384.22334798177087,
+        273.6666666666667,
+        387.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/604",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 267.6666666666667,
+          "t": 387.8900146484375,
+          "r": 273.6666666666667,
+          "b": 384.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "225",
+        "spans": []
+      },
+      "reading_order_index": 48
+    },
+    {
+      "id": "p12-texts-602",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        252.0,
+        384.8900146484375,
+        256.0,
+        387.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/602",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          2
+        ],
+        "raw_docling_bbox": {
+          "l": 252.0,
+          "t": 387.55668131510413,
+          "r": 256.0,
+          "b": 384.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "25",
+        "spans": []
+      },
+      "reading_order_index": 49
+    },
+    {
+      "id": "p12-texts-603",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        259.6666666666667,
+        384.55668131510413,
+        263.6666666666667,
+        387.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/603",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 259.6666666666667,
+          "t": 387.55668131510413,
+          "r": 263.6666666666667,
+          "b": 384.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "175",
+        "spans": []
+      },
+      "reading_order_index": 50
+    },
+    {
+      "id": "p12-texts-606",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        359.0,
+        384.8900146484375,
+        364.33333333333337,
+        387.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/606",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 359.0,
+          "t": 387.55668131510413,
+          "r": 364.33333333333337,
+          "b": 384.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "275",
+        "spans": []
+      },
+      "reading_order_index": 51
+    },
+    {
+      "id": "p12-texts-607",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        260.0,
+        375.55668131510413,
+        265.0,
+        380.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/607",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 260.0,
+          "t": 380.22334798177087,
+          "r": 265.0,
+          "b": 375.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(a)",
+        "spans": []
+      },
+      "reading_order_index": 52
+    },
+    {
+      "id": "p12-texts-608",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        231.0,
+        342.8900146484375,
+        235.66666666666666,
+        347.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/608",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 231.0,
+          "t": 347.22334798177087,
+          "r": 235.66666666666666,
+          "b": 342.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "0.5",
+        "spans": []
+      },
+      "reading_order_index": 53
+    },
+    {
+      "id": "p12-texts-609",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        377.0,
+        337.55668131510413,
+        382.66666666666663,
+        343.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/609",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          4
+        ],
+        "raw_docling_bbox": {
+          "l": 377.0,
+          "t": 343.55668131510413,
+          "r": 382.66666666666663,
+          "b": 337.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "0.03",
+        "spans": []
+      },
+      "reading_order_index": 54
+    },
+    {
+      "id": "p12-texts-610",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        378.0,
+        332.55668131510413,
+        382.0,
+        336.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/610",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 378.0,
+          "t": 336.8900146484375,
+          "r": 382.0,
+          "b": 332.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": ".02",
+        "spans": []
+      },
+      "reading_order_index": 55
+    },
+    {
+      "id": "p12-texts-611",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        378.66666666666663,
+        327.22334798177087,
+        381.33333333333337,
+        329.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/611",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          2
+        ],
+        "raw_docling_bbox": {
+          "l": 378.66666666666663,
+          "t": 329.8900146484375,
+          "r": 381.33333333333337,
+          "b": 327.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "01",
+        "spans": []
+      },
+      "reading_order_index": 56
+    },
+    {
+      "id": "p12-texts-620",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        346.33333333333337,
+        321.22334798177087,
+        364.0,
+        325.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/620",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          6
+        ],
+        "raw_docling_bbox": {
+          "l": 346.33333333333337,
+          "t": 325.55668131510413,
+          "r": 364.0,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "225275",
+        "spans": []
+      },
+      "reading_order_index": 57
+    },
+    {
+      "id": "p12-texts-612",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        241.33333333333331,
+        321.55668131510413,
+        246.0,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/612",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          2
+        ],
+        "raw_docling_bbox": {
+          "l": 241.33333333333331,
+          "t": 325.22334798177087,
+          "r": 246.0,
+          "b": 321.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "75",
+        "spans": []
+      },
+      "reading_order_index": 58
+    },
+    {
+      "id": "p12-texts-613",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        249.0,
+        321.22334798177087,
+        255.0,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/613",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 249.0,
+          "t": 325.22334798177087,
+          "r": 255.0,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "125",
+        "spans": []
+      },
+      "reading_order_index": 59
+    },
+    {
+      "id": "p12-texts-614",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        258.3333333333333,
+        321.22334798177087,
+        264.6666666666667,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/614",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 258.3333333333333,
+          "t": 325.22334798177087,
+          "r": 264.6666666666667,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "175",
+        "spans": []
+      },
+      "reading_order_index": 60
+    },
+    {
+      "id": "p12-texts-615",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        266.0,
+        321.22334798177087,
+        273.3333333333333,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/615",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 266.0,
+          "t": 325.22334798177087,
+          "r": 273.3333333333333,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "225",
+        "spans": []
+      },
+      "reading_order_index": 61
+    },
+    {
+      "id": "p12-texts-618",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        331.66666666666663,
+        321.55668131510413,
+        337.0,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/618",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 331.66666666666663,
+          "t": 325.22334798177087,
+          "r": 337.0,
+          "b": 321.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "125",
+        "spans": []
+      },
+      "reading_order_index": 62
+    },
+    {
+      "id": "p12-texts-619",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        340.0,
+        321.22334798177087,
+        346.0,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/619",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 340.0,
+          "t": 325.22334798177087,
+          "r": 346.0,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "175",
+        "spans": []
+      },
+      "reading_order_index": 63
+    },
+    {
+      "id": "p12-texts-621",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        365.0,
+        321.55668131510413,
+        371.0,
+        325.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/621",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 365.0,
+          "t": 325.22334798177087,
+          "r": 371.0,
+          "b": 321.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "325",
+        "spans": []
+      },
+      "reading_order_index": 64
+    },
+    {
+      "id": "p12-texts-616",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        274.6666666666667,
+        321.22334798177087,
+        282.3333333333333,
+        324.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/616",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 274.6666666666667,
+          "t": 324.8900146484375,
+          "r": 282.3333333333333,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "275",
+        "spans": []
+      },
+      "reading_order_index": 65
+    },
+    {
+      "id": "p12-texts-617",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        287.3333333333333,
+        321.22334798177087,
+        292.6666666666667,
+        324.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/617",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 287.3333333333333,
+          "t": 324.8900146484375,
+          "r": 292.6666666666667,
+          "b": 321.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "325",
+        "spans": []
+      },
+      "reading_order_index": 66
+    },
+    {
+      "id": "p12-texts-622",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        259.6666666666667,
+        312.22334798177087,
+        265.6666666666667,
+        317.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/622",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 259.6666666666667,
+          "t": 317.8900146484375,
+          "r": 265.6666666666667,
+          "b": 312.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(c)",
+        "spans": []
+      },
+      "reading_order_index": 67
+    },
+    {
+      "id": "p12-texts-623",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        341.33333333333337,
+        312.22334798177087,
+        348.0,
+        317.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/623",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          3
+        ],
+        "raw_docling_bbox": {
+          "l": 341.33333333333337,
+          "t": 317.8900146484375,
+          "r": 348.0,
+          "b": 312.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "(d)",
+        "spans": []
+      },
+      "reading_order_index": 68
+    },
+    {
+      "id": "p12-texts-624",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.33333333333334,
+        307.22334798177087,
+        382.0,
+        313.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/624",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          116
+        ],
+        "raw_docling_bbox": {
+          "l": 224.33333333333334,
+          "t": 313.22334798177087,
+          "r": 382.0,
+          "b": 307.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Fig. 7. (a) Degree, (b) local cstering coeffient, (c) betwees (in logarithmic units) and (d) coenes entality for the",
+        "spans": []
+      },
+      "reading_order_index": 69
+    },
+    {
+      "id": "p12-texts-626",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        303.22334798177087,
+        382.33333333333337,
+        309.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/626",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          91
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 309.55668131510413,
+          "r": 382.33333333333337,
+          "b": 303.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "-currnetoks obained from trajctores o tbLre systm Eq (4)ferdifent controlparametes To hance",
+        "spans": []
+      },
+      "reading_order_index": 70
+    },
+    {
+      "id": "p12-texts-625",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.0,
+        299.55668131510413,
+        382.66666666666663,
+        306.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/625",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          55
+        ],
+        "raw_docling_bbox": {
+          "l": 224.0,
+          "t": 306.55668131510413,
+          "r": 382.66666666666663,
+          "b": 299.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "thevisibilityof thedringstrutu,rhotdlbdivdfrnhierisbtfr",
+        "spans": []
+      },
+      "reading_order_index": 71
+    },
+    {
+      "id": "p12-texts-631",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        336.33333333333337,
+        296.8900146484375,
+        382.0,
+        302.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/631",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          34
+        ],
+        "raw_docling_bbox": {
+          "l": 336.33333333333337,
+          "t": 302.22334798177087,
+          "r": 382.0,
+          "b": 296.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "m norm, c = 0.05e with o being the",
+        "spans": []
+      },
+      "reading_order_index": 72
+    },
+    {
+      "id": "p12-texts-627",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.66666666666666,
+        297.22334798177087,
+        273.6666666666667,
+        301.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/627",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          39
+        ],
+        "raw_docling_bbox": {
+          "l": 224.66666666666666,
+          "t": 301.8900146484375,
+          "r": 273.6666666666667,
+          "b": 297.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "points (for each vale of r) in the asso",
+        "spans": []
+      },
+      "reading_order_index": 73
+    },
+    {
+      "id": "p12-texts-629",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        275.0,
+        297.8900146484375,
+        287.6666666666667,
+        301.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/629",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          10
+        ],
+        "raw_docling_bbox": {
+          "l": 275.0,
+          "t": 301.55668131510413,
+          "r": 287.6666666666667,
+          "b": 297.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "iated Poin",
+        "spans": []
+      },
+      "reading_order_index": 74
+    },
+    {
+      "id": "p12-texts-630",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        288.3333333333333,
+        297.22334798177087,
+        333.33333333333337,
+        301.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/630",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          36
+        ],
+        "raw_docling_bbox": {
+          "l": 288.3333333333333,
+          "t": 301.55668131510413,
+          "r": 333.33333333333337,
+          "b": 297.22334798177087,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "care sections at z = 0, ± < 0 (maxin",
+        "spans": []
+      },
+      "reading_order_index": 75
+    },
+    {
+      "id": "p12-texts-628",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        292.55668131510413,
+        382.33333333333337,
+        299.22334798177087
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/628",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          10
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 299.22334798177087,
+          "r": 382.33333333333337,
+          "b": 292.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "irialsdidt",
+        "spans": []
+      },
+      "reading_order_index": 76
+    },
+    {
+      "id": "p12-texts-632",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.33333333333334,
+        289.55668131510413,
+        382.33333333333337,
+        295.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/632",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          121
+        ],
+        "raw_docling_bbox": {
+          "l": 224.33333333333334,
+          "t": 295.55668131510413,
+          "r": 382.33333333333337,
+          "b": 289.55668131510413,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "to the standard dinition of closness Donner et al. 201ob], which is usefl if oly few isolated vertices exist, ce has been",
+        "spans": []
+      },
+      "reading_order_index": 77
+    },
+    {
+      "id": "p12-texts-633",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        224.66666666666666,
+        285.8900146484375,
+        383.0,
+        292.55668131510413
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/633",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          91
+        ],
+        "raw_docling_bbox": {
+          "l": 224.66666666666666,
+          "t": 292.55668131510413,
+          "r": 383.0,
+          "b": 285.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "compatehere separately for theindividalmtualy discnetedsubgaphsThbrodwinos inwithsare ponts",
+        "spans": []
+      },
+      "reading_order_index": 78
+    },
+    {
+      "id": "p12-texts-634",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        225.0,
+        282.8900146484375,
+        373.33333333333337,
+        287.8900146484375
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/634",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          118
+        ],
+        "raw_docling_bbox": {
+          "l": 225.0,
+          "t": 287.8900146484375,
+          "r": 373.33333333333337,
+          "b": 282.8900146484375,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "indicate the presence of periodic orbits in the system, which have not been perfectly sampled in the Poincar sections.",
+        "spans": []
+      },
+      "reading_order_index": 79
+    },
+    {
+      "id": "p12-texts-560",
+      "type": "caption",
+      "page_number": 12,
+      "bbox": [
+        97.517,
+        194.87862238028106,
+        499.04699692799994,
+        241.84316664843755
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/560",
+        "raw_docling_label": "caption",
+        "raw_docling_charspan": [
+          0,
+          356
+        ],
+        "raw_docling_bbox": {
+          "l": 97.517,
+          "t": 241.84316664843755,
+          "r": 499.04699692799994,
+          "b": 194.87862238028106,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "Figure 5. One of the cases where the labels in CS-Large were obviously wrong and had to be corrected. These cases seem to be due to wrong scaling. However, they occur in multiple documents with a different scaling factor every time. The annotations do contain a 'dpi' attribute, but applying scaling based on this attribute was not helpful for these cases.",
+        "spans": []
+      },
+      "reading_order_index": 80
+    },
+    {
+      "id": "p12-texts-635",
+      "type": "paragraph",
+      "page_number": 12,
+      "bbox": [
+        76.256,
+        76.71281887190116,
+        520.4835692641999,
+        180.72158264843756
+      ],
+      "relationships": [],
+      "provenance": {
+        "parser_backend": "docling",
+        "docling_schema": "DoclingDocument",
+        "docling_document_version": "1.10.0",
+        "raw_docling_ref": "#/texts/635",
+        "raw_docling_label": "text",
+        "raw_docling_charspan": [
+          0,
+          745
+        ],
+        "raw_docling_bbox": {
+          "l": 76.256,
+          "t": 180.72158264843756,
+          "r": 520.4835692641999,
+          "b": 76.71281887190116,
+          "coord_origin": "BOTTOMLEFT"
+        },
+        "bbox_coord_origin": "BOTTOMLEFT",
+        "bbox_unit": "pt",
+        "source_pdf": "mdpi_pdf_elements.pdf",
+        "source_pdf_hash": "84f40e233994f1c96a65bf1fc681fef2ce22d3b13b16cf3170212603ff50f94b"
+      },
+      "content": {
+        "text": "To perform the evaluation, one needs to match detected boxes to ground truth boxes in some way. Identically to the evaluation in [5], we use the Hungarian algorithm to optimize the sum of the IoU values of all pairs of ground truth document elements and extracted document elements for each page. Compared to the greedy matching used for evaluation in [4], this should either slightly improve the results or have no effect. Our object detection-based method has a test-time hyperparameter used for detection: The system outputs bounding boxes with a confidence in the interval [0,1]. Bounding boxes can be filtered according to the confidence and this affects the precision and recall of the result. Figure 6 illustrates how the value is chosen.",
+        "spans": []
+      },
+      "reading_order_index": 81
+    }
+  ]
+}

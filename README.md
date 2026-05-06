@@ -1,0 +1,97 @@
+# pdf-quality-report
+
+A small local demo for checking the quality of parsed PDF output.
+
+It takes JSON exported by [Docling](https://github.com/docling-project/docling) and creates:
+
+- a small traceable JSON file with text blocks, page numbers, bounding boxes, and provenance
+- a deterministic Markdown quality report that highlights missing fields, broken provenance, invalid bounding boxes, and layout/noise signals
+
+This project does not try to replace Docling. Docling does the PDF parsing. This repo checks whether the parser output is structured, traceable, and safe enough to review before using it in downstream workflows.
+
+It does **not** claim OCR quality, RAG answer quality, table reconstruction, legal extraction, compliance readiness, production extraction accuracy, or enterprise readiness.
+
+Technical note: the traceable JSON format is inspired by UIF, an internal block model with text, page numbers, bounding boxes, and provenance. You do not need to know UIF to use this demo.
+
+## What The Report Checks
+
+The report answers three practical questions:
+
+1. Does every extracted block have the basic fields a pipeline needs?
+2. Can each block be traced back to a source page and bounding box?
+3. Does the page contain layout noise that a human should review before using the output?
+
+The five current checks are:
+
+1. Required field coverage: are core fields such as `id`, `type`, `page_number`, `bbox`, and `reading_order_index` present?
+2. Provenance completeness: can each block be traced back to Docling metadata and the source PDF?
+3. BBox sanity: are bounding boxes present, finite, and ordered correctly?
+4. Content vs noise ratio: how much looks like document content compared with headers, footers, images, or other secondary blocks?
+5. Text usefulness: are text blocks empty, suspiciously short, or duplicated?
+
+It also lists diagnostic noise/layout signals such as table-marker artifacts, headers/footers, and ambiguous image blocks. These signals are for review only; they do not add hard failures or warnings by themselves.
+
+## Install
+
+```bash
+python -m venv .venv
+. .venv/bin/activate
+python -m pip install -e ".[dev]"
+```
+
+Docling is only needed when you want to create the parser JSON from a PDF:
+
+```bash
+python -m pip install -e ".[docling]"
+```
+
+## Example Workflow
+
+The example uses:
+
+Hansen, M.; Pomp, A.; Erki, K.; Meisen, T. "Data-Driven Recognition and Extraction of PDF Document Elements." Technologies 2019, 7(3), 65. https://doi.org/10.3390/technologies7030065
+
+Download the PDF from the official article page:
+
+https://www.mdpi.com/2227-7080/7/3/65
+
+Then generate Docling JSON:
+
+```bash
+docling path/to/article.pdf --to json --image-export-mode placeholder --no-ocr --output tmp/docling
+```
+
+Convert selected pages to normalized JSON:
+
+```bash
+python -m pdf_quality_report.convert \
+  --input tmp/docling/article.json \
+  --output examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --pages 6 \
+  --source-pdf path/to/article.pdf
+```
+
+Create a Markdown quality report:
+
+```bash
+python -m pdf_quality_report.report \
+  --input examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --output examples/mdpi_pdf_elements/page_006/quality_report.md
+```
+
+## Included Examples
+
+This repository includes derived example outputs for page 6 and page 12 of the sample article:
+
+- `examples/mdpi_pdf_elements/page_006/normalized_blocks.json`
+- `examples/mdpi_pdf_elements/page_006/quality_report.md`
+- `examples/mdpi_pdf_elements/page_012/normalized_blocks.json`
+- `examples/mdpi_pdf_elements/page_012/quality_report.md`
+
+The source PDF itself is not committed. See `examples/mdpi_pdf_elements/SOURCE.md` for attribution and license details.
+
+## License
+
+Code in this repository is MIT licensed.
+
+The sample article is third-party content distributed under CC BY 4.0 by MDPI. Derived example artifacts are provided for demonstration with attribution; they are not endorsed by MDPI or the article authors.

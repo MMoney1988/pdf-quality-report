@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "pdf-quality-report"
+version = "0.1.0"
+description = "Generate deterministic quality reports for Docling parser output."
+readme = "README.md"
+requires-python = ">=3.10"
+license = "MIT"
+authors = [
+  { name = "Michael Gaedicke" }
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+  "pytest>=8",
+  "ruff>=0.4",
+]
+docling = [
+  "docling>=2",
+]
+
+[project.scripts]
+pdf-quality-convert = "pdf_quality_report.convert:main"
+pdf-quality-report = "pdf_quality_report.report:main"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["src"]
+
+[tool.ruff]
+line-length = 120
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B", "C4", "SIM"]
