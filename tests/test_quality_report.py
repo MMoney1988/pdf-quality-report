@@ -52,6 +52,7 @@ def test_quality_checks_pass_hard_checks_and_warn_for_noise() -> None:
     assert statuses["Content vs Noise Ratio"] == "WARN"
     assert report.hard_failures == 0
     assert report.warnings == 1
+    assert report.decision == "REVIEW"
 
 
 def test_quality_checks_fail_missing_required_field() -> None:
@@ -64,6 +65,7 @@ def test_quality_checks_fail_missing_required_field() -> None:
     assert required.status == "FAIL"
     assert any("missing block field: bbox" in detail for detail in required.details)
     assert report.hard_failures == 2
+    assert report.decision == "BLOCK"
 
 
 def test_quality_checks_fail_malformed_top_level_types() -> None:
@@ -120,6 +122,7 @@ def test_markdown_report_contains_required_sections() -> None:
 
     assert "# Minimal PDF Quality Report" in markdown
     assert "## Summary" in markdown
+    assert "- decision: REVIEW" in markdown
     assert "## Noise / Layout Signals" in markdown
     assert "table_marker_artifacts: 1" in markdown
     assert "## Required Field Coverage" in markdown
@@ -134,4 +137,6 @@ def test_cli_writes_quality_report(tmp_path: Path) -> None:
     assert main(["--input", str(uif_path), "--output", str(report_path)]) == 0
 
     assert report_path.exists()
-    assert "hard_failures: 0" in report_path.read_text(encoding="utf-8")
+    report_text = report_path.read_text(encoding="utf-8")
+    assert "hard_failures: 0" in report_text
+    assert "decision: GO" in report_text

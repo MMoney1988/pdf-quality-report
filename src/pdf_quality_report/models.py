@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from typing import Literal
 
 CheckStatus = Literal["PASS", "WARN", "FAIL"]
+ReportDecision = Literal["GO", "REVIEW", "BLOCK"]
 
 
 @dataclass(frozen=True)
@@ -37,3 +38,12 @@ class QualityReport:
     warnings: int
     results: list[CheckResult]
     noise_layout_signals: NoiseLayoutSignals = field(default_factory=NoiseLayoutSignals)
+
+    @property
+    def decision(self) -> ReportDecision:
+        """Conservative downstream-use decision derived from check statuses."""
+        if self.hard_failures:
+            return "BLOCK"
+        if self.warnings:
+            return "REVIEW"
+        return "GO"
