@@ -110,7 +110,7 @@ The tests use small synthetic Docling-style JSON fixtures, not the committed MDP
 - ambiguous_image_blocks: 1
 ```
 
-This means the page passed the structural checks, but still has layout/noise signals that should be reviewed before using the output downstream.
+`REVIEW` means the page is structurally usable, but contains warnings or layout/noise signals that should be checked before downstream use.
 
 ## License
 
