@@ -101,6 +101,7 @@ The tests use small synthetic Docling-style JSON fixtures, not the committed MDP
 - total_blocks: 82
 - hard_failures: 0
 - warnings: 2
+- decision: REVIEW
 
 ## Noise / Layout Signals
 - table_marker_artifacts: 0

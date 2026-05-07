@@ -21,6 +21,7 @@ def render_markdown_report(report: QualityReport) -> str:
         f"- total_blocks: {report.total_blocks}",
         f"- hard_failures: {report.hard_failures}",
         f"- warnings: {report.warnings}",
+        f"- decision: {report.decision}",
         "",
     ]
     lines.extend(_render_noise_layout_signals(report.noise_layout_signals))

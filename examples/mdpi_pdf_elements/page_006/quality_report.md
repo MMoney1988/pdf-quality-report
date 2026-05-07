@@ -4,6 +4,7 @@
 - total_blocks: 8
 - hard_failures: 0
 - warnings: 1
+- decision: REVIEW
 
 ## Noise / Layout Signals
 Diagnostic signals only; these do not add hard failures or warnings.
