@@ -81,6 +81,26 @@ python -m pdf_quality_report.report \
   --output examples/mdpi_pdf_elements/page_006/quality_report.md
 ```
 
+## Export Clean Markdown
+
+Export normalized blocks to clean Markdown with source reference comments for downstream review or RAG ingestion preparation:
+
+```bash
+python -m pdf_quality_report.to_markdown \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output /tmp/page_012.md
+```
+
+Use `--out` as a short alias for `--output`. See [Export Clean Markdown](docs/how_to_export_clean_markdown.md) for a short walkthrough.
+
+If the package entry point is installed:
+
+```bash
+pdf-quality-markdown \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output /tmp/page_012.md
+```
+
 ## Included Examples
 
 This repository includes derived example outputs for page 6 and page 12 of the sample article:
