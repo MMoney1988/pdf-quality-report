@@ -123,7 +123,11 @@ def test_markdown_report_contains_required_sections() -> None:
     assert "# Minimal PDF Quality Report" in markdown
     assert "## Summary" in markdown
     assert "- decision: REVIEW" in markdown
+    assert "## Interpretation" in markdown
+    assert "Derived from recorded checks and diagnostic signals" in markdown
     assert "## Noise / Layout Signals" in markdown
+    assert markdown.index("## Summary") < markdown.index("## Interpretation")
+    assert markdown.index("## Interpretation") < markdown.index("## Noise / Layout Signals")
     assert "table_marker_artifacts: 1" in markdown
     assert "## Required Field Coverage" in markdown
     assert "## Text Usefulness" in markdown
@@ -140,3 +144,4 @@ def test_cli_writes_quality_report(tmp_path: Path) -> None:
     report_text = report_path.read_text(encoding="utf-8")
     assert "hard_failures: 0" in report_text
     assert "decision: GO" in report_text
+    assert "This does not prove complete or semantically correct extraction" in report_text
