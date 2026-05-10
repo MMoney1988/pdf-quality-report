@@ -9,7 +9,13 @@ from pathlib import Path
 from typing import Any
 
 from .checks import run_quality_checks
+from .interpret import interpret_quality_report
 from .models import CheckResult, NoiseLayoutSignals, QualityReport
+
+INTERPRETATION_NOTE = (
+    "Derived from recorded checks and diagnostic signals. "
+    "This explains the report decision; it does not add new checks or change the decision."
+)
 
 
 def render_markdown_report(report: QualityReport) -> str:
@@ -24,6 +30,7 @@ def render_markdown_report(report: QualityReport) -> str:
         f"- decision: {report.decision}",
         "",
     ]
+    lines.extend(_render_interpretation(report))
     lines.extend(_render_noise_layout_signals(report.noise_layout_signals))
     for result in report.results:
         lines.extend(_render_check_result(result))
@@ -69,6 +76,17 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     report = write_quality_report(args.input_path, args.output_path)
     return 1 if report.hard_failures else 0
+
+
+def _render_interpretation(report: QualityReport) -> list[str]:
+    lines = [
+        "## Interpretation",
+        INTERPRETATION_NOTE,
+        "",
+    ]
+    lines.extend(f"- {bullet}" for bullet in interpret_quality_report(report))
+    lines.append("")
+    return lines
 
 
 def _render_check_result(result: CheckResult) -> list[str]:
