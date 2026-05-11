@@ -116,7 +116,9 @@ The tests use small synthetic Docling-style JSON fixtures, not the committed MDP
 
 ## Example Report Output Excerpt
 
-Excerpt from the generated page 12 report; later check sections and block-level warning details are omitted.
+The excerpt below comes from page 12 of the included MDPI research-paper example. A block is one extracted
+page element, such as text, a header, an image, or a caption. Later check sections and block-level warning
+details are not shown.
 
 ```markdown
 ## Summary
@@ -126,21 +128,25 @@ Excerpt from the generated page 12 report; later check sections and block-level 
 - decision: REVIEW
 
 ## Interpretation
-This section explains the warnings below in plain language. It does not add new checks or change the decision.
+Why REVIEW? The hard structure checks passed, but warning checks need review in this report: Content vs Noise Ratio and Text Usefulness. Warnings are decision-level findings. Noise / Layout Signals provide supporting evidence and are counted separately.
 
 - Content vs Noise Ratio is WARN: The report treats 79 blocks as possible main document text. The report treats 3 blocks as possible layout or noise elements.
 - 2 blocks are typed as headers: p12-texts-555 and p12-texts-556. 1 block is typed as image: p12-pictures-14.
-- Text Usefulness is WARN: The report found 28 short or repetitive text item(s).
+- Text Usefulness is WARN: This report found 22 very short extracted text values and 6 repeated-text groups.
+- These findings come from extracted text blocks. Quoted values are the actual extracted text values, and block IDs show where they came from in the normalized output.
+- In this report, very short means normalized text with 3 characters or fewer.
 - Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or repeated headers, footers, or page labels.
 
 ## Noise / Layout Signals
+These signals identify page-layout elements that may need review before reusing the extracted text. They are supporting evidence and are counted separately from warning checks.
+
 - table_marker_artifacts: 0
 - running_furniture_blocks: 2
 - visual_anchor_blocks: 1
 - ambiguous_image_blocks: 1
 ```
 
-`REVIEW` means the page passed the hard structure checks, but layout/noise or text-usefulness warnings should be checked before Markdown export, RAG ingestion preparation, or manual extraction.
+`REVIEW` means the hard structure checks passed, but warning details still need human review before Markdown export, RAG ingestion preparation, or manual extraction.
 
 ## License
 

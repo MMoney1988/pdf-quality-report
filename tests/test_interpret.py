@@ -84,18 +84,21 @@ def test_text_usefulness_warn_splits_short_and_duplicate_examples() -> None:
     bullets = interpret_quality_report(report)
 
     assert any(
-        "Text Usefulness is WARN: The report found 6 short or repetitive text item(s)" in bullet for bullet in bullets
+        "Text Usefulness is WARN: This report found 6 very short extracted text values and 3 repeated-text groups"
+        in bullet
+        for bullet in bullets
     )
+    assert any("Quoted values are the actual extracted text values" in bullet for bullet in bullets)
+    assert any("very short means normalized text with 3 characters or fewer" in bullet for bullet in bullets)
     assert any("Very short numeric fragments such as '0.5' and '225'" in bullet for bullet in bullets)
-    assert any("Label-shaped fragments such as '(a)'" in bullet for bullet in bullets)
+    assert any("Short label fragments such as '(a)'" in bullet for bullet in bullets)
     assert any("Repeated text appears in 3 group(s)" in bullet for bullet in bullets)
-    assert any("Repeated value '0.5' appears in p12-texts-601 and p12-texts-608" in bullet for bullet in bullets)
     assert any(
-        "Repeated value '225' appears in p12-texts-604, p12-texts-605, and p12-texts-615" in bullet
+        "Repeated text value '0.5' appears in block IDs p12-texts-601 and p12-texts-608" in bullet
         for bullet in bullets
     )
     assert any(
-        "Review these fragments before Markdown export, RAG ingestion preparation, or manual extraction" in bullet
+        "Repeated text value '225' appears in block IDs p12-texts-604, p12-texts-605, and p12-texts-615" in bullet
         for bullet in bullets
     )
 
@@ -156,13 +159,12 @@ def test_non_empty_noise_signals_explain_review_without_hard_failure() -> None:
 
     bullets = interpret_quality_report(report)
 
-    assert any(
-        "These layout findings should be checked, but they do not count as hard failures" in bullet
-        for bullet in bullets
-    )
+    assert any("Layout/noise signals point to headers, footers, images, labels" in bullet for bullet in bullets)
     assert any("1 block is typed as headers: p6-texts-58" in bullet for bullet in bullets)
     assert any("1 block is typed as image: p6-pictures-4" in bullet for bullet in bullets)
-    assert any("p6-pictures-4 is typed as image and has empty text" in bullet for bullet in bullets)
+    assert any(
+        "Block ID p6-pictures-4 is an image block with no extracted text context" in bullet for bullet in bullets
+    )
     assert not any("table marker artifact" in bullet for bullet in bullets)
     assert report.decision == "REVIEW"
 

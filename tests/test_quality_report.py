@@ -120,14 +120,18 @@ def test_markdown_report_contains_required_sections() -> None:
 
     markdown = render_markdown_report(report)
 
-    assert "# Minimal PDF Quality Report" in markdown
+    assert "# PDF Parser Output Quality Report" in markdown
     assert "## Summary" in markdown
     assert "- decision: REVIEW" in markdown
     assert "## Interpretation" in markdown
-    assert "This section explains the warnings below in plain language" in markdown
+    assert "Why REVIEW?" in markdown
+    assert "Warnings are decision-level findings" in markdown
     assert "## Noise / Layout Signals" in markdown
+    assert "## Check Results" in markdown
+    assert "## Recommended Review Actions" in markdown
     assert markdown.index("## Summary") < markdown.index("## Interpretation")
     assert markdown.index("## Interpretation") < markdown.index("## Noise / Layout Signals")
+    assert markdown.index("## Noise / Layout Signals") < markdown.index("## Check Results")
     assert "table_marker_artifacts: 1" in markdown
     assert "## Required Field Coverage" in markdown
     assert "## Text Usefulness" in markdown
