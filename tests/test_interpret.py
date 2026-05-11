@@ -51,8 +51,9 @@ def test_content_vs_noise_warn_gets_conservative_explanation() -> None:
 
     bullets = interpret_quality_report(report)
 
-    assert any("6 body-text candidate block(s) and 2 layout/non-body block(s)" in bullet for bullet in bullets)
-    assert any("2 header/footer-like block(s) (p6-texts-58 and p6-texts-59)" in bullet for bullet in bullets)
+    assert any("The report treats 6 blocks as possible main document text" in bullet for bullet in bullets)
+    assert any("The report treats 2 blocks as possible layout or noise elements" in bullet for bullet in bullets)
+    assert any("2 blocks are typed as headers: p6-texts-58 and p6-texts-59" in bullet for bullet in bullets)
     assert not any("content-like" in bullet for bullet in bullets)
     assert not any("secondary/noise candidate" in bullet for bullet in bullets)
     assert report.decision == "REVIEW"
@@ -83,17 +84,23 @@ def test_text_usefulness_warn_splits_short_and_duplicate_examples() -> None:
     bullets = interpret_quality_report(report)
 
     assert any(
-        "Text Usefulness is WARN: The report found 6 short or repetitive text item(s)" in bullet for bullet in bullets
-    )
-    assert any("Very short numeric fragments such as '0.5' and '225'" in bullet for bullet in bullets)
-    assert any("Label-shaped fragments such as '(a)'" in bullet for bullet in bullets)
-    assert any("Repeated text appears in 3 group(s)" in bullet for bullet in bullets)
-    assert any("Repeated value '0.5' appears in p12-texts-601 and p12-texts-608" in bullet for bullet in bullets)
-    assert any(
-        "Repeated value '225' appears in p12-texts-604, p12-texts-605, and p12-texts-615" in bullet
+        "Text Usefulness is WARN: This report found 6 very short extracted text values and 3 repeated-text groups"
+        in bullet
         for bullet in bullets
     )
-    assert any("Review these fragments before downstream use" in bullet for bullet in bullets)
+    assert any("Quoted values are the actual extracted text values" in bullet for bullet in bullets)
+    assert any("very short means normalized text with 3 characters or fewer" in bullet for bullet in bullets)
+    assert any("Very short numeric fragments such as '0.5' and '225'" in bullet for bullet in bullets)
+    assert any("Short label fragments such as '(a)'" in bullet for bullet in bullets)
+    assert any("Repeated text appears in 3 group(s)" in bullet for bullet in bullets)
+    assert any(
+        "Repeated text value '0.5' appears in block IDs p12-texts-601 and p12-texts-608" in bullet
+        for bullet in bullets
+    )
+    assert any(
+        "Repeated text value '225' appears in block IDs p12-texts-604, p12-texts-605, and p12-texts-615" in bullet
+        for bullet in bullets
+    )
 
 
 def test_text_usefulness_duplicate_falls_back_to_ids_when_value_is_not_available() -> None:
@@ -134,7 +141,7 @@ def test_bbox_failure_gets_failure_explanation_without_decision_change() -> None
     assert report.decision == "BLOCK"
 
 
-def test_non_empty_noise_signals_are_diagnostic_only() -> None:
+def test_non_empty_noise_signals_explain_review_without_hard_failure() -> None:
     report = _report(
         [
             CheckResult(
@@ -146,14 +153,18 @@ def test_non_empty_noise_signals_are_diagnostic_only() -> None:
         signals=NoiseLayoutSignals(
             running_furniture_blocks=["p6-texts-58: type=header, text='Header'"],
             visual_anchor_blocks=["p6-pictures-4: type=image, text=<empty>"],
+            ambiguous_image_blocks=["p6-pictures-4: type=image, text=<empty>"],
         ),
     )
 
     bullets = interpret_quality_report(report)
 
-    assert any("Diagnostic layout signals are present and do not change the decision" in bullet for bullet in bullets)
-    assert any("1 header/footer-like block(s) (p6-texts-58)" in bullet for bullet in bullets)
-    assert any("1 image/figure-related block(s) (p6-pictures-4)" in bullet for bullet in bullets)
+    assert any("Layout/noise signals point to headers, footers, images, labels" in bullet for bullet in bullets)
+    assert any("1 block is typed as headers: p6-texts-58" in bullet for bullet in bullets)
+    assert any("1 block is typed as image: p6-pictures-4" in bullet for bullet in bullets)
+    assert any(
+        "Block ID p6-pictures-4 is an image block with no extracted text context" in bullet for bullet in bullets
+    )
     assert not any("table marker artifact" in bullet for bullet in bullets)
     assert report.decision == "REVIEW"
 

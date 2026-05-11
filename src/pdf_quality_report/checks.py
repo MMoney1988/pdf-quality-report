@@ -202,8 +202,11 @@ def check_text_usefulness(blocks: list[dict[str, Any]]) -> CheckResult:
         if normalized_text and len(normalized_text) <= SHORT_TEXT_THRESHOLD:
             warnings.append(f"{block_id}: very short text: {normalized_text!r}")
 
-    duplicate_groups = sorted(sorted(ids) for ids in normalized_text_to_ids.values() if len(ids) > 1)
-    warnings.extend(f"duplicate normalized text across blocks: {', '.join(ids)}" for ids in duplicate_groups)
+    duplicate_groups = sorted((sorted(ids), text) for text, ids in normalized_text_to_ids.items() if len(ids) > 1)
+    warnings.extend(
+        f"repeated text value {text!r} appears in block IDs: {', '.join(ids)}"
+        for ids, text in duplicate_groups
+    )
 
     status: CheckStatus
     if failures:

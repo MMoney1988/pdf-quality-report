@@ -1,4 +1,4 @@
-# Minimal PDF Quality Report
+# PDF Parser Output Quality Report
 
 ## Summary
 - total_blocks: 82
@@ -7,31 +7,43 @@
 - decision: REVIEW
 
 ## Interpretation
-Derived from recorded checks and diagnostic signals. This explains the report decision; it does not add new checks or change the decision.
+Why REVIEW? The hard structure checks passed, but warning checks need review in this report: Content vs Noise Ratio and Text Usefulness. Warnings are decision-level findings. Noise / Layout Signals provide supporting evidence and are counted separately.
 
-- Content vs Noise Ratio is WARN: 79 body-text candidate block(s) and 3 layout/non-body block(s) were found.
-- Layout/non-body examples: 2 header/footer-like block(s) (p12-texts-555 and p12-texts-556) and 1 image/figure-related block(s) (p12-pictures-14).
-- Text Usefulness is WARN: The report found 28 short or repetitive text item(s).
-- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or page furniture.
-- Label-shaped fragments such as '(a)', '(c)', and '(d)' are common in figure labels or layout fragments.
-- Repeated text appears in 6 group(s). Examples: Repeated value '0.5' appears in p12-texts-601 and p12-texts-608; Repeated value '175' appears in p12-texts-603, p12-texts-614, and p12-texts-619; Repeated value '225' appears in p12-texts-604, p12-texts-605, and p12-texts-615.
-- Review these fragments before downstream use.
-- Diagnostic layout signals are present and do not change the decision.
-- Ambiguous image signal(s): 1 signal(s), including p12-pictures-14. These may point to the same image block already listed above.
+- Content vs Noise Ratio is WARN: The report treats 79 blocks as possible main document text. The report treats 3 blocks as possible layout or noise elements.
+- 2 blocks are typed as headers: p12-texts-555 and p12-texts-556. 1 block is typed as image: p12-pictures-14.
+- Text Usefulness is WARN: This report found 22 very short extracted text values and 6 repeated-text groups.
+- These findings come from extracted text blocks. Quoted values are the actual extracted text values, and block IDs show where they came from in the normalized output.
+- In this report, very short means normalized text with 3 characters or fewer.
+- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or repeated headers, footers, or page labels.
+- Short label fragments such as '(a)', '(c)', and '(d)' are common in subfigure labels or other layout labels.
+- Repeated text appears in 6 group(s). Examples: Repeated text value '0.5' appears in block IDs p12-texts-601 and p12-texts-608; Repeated text value '175' appears in block IDs p12-texts-603, p12-texts-614, and p12-texts-619; Repeated text value '225' appears in block IDs p12-texts-604, p12-texts-605, and p12-texts-615.
+- Layout/noise signals point to headers, footers, images, labels, or other non-main-text elements that may need review before reuse.
+- Block ID p12-pictures-14 is an image block with no extracted text context.
 
 ## Noise / Layout Signals
-Diagnostic signals only; these do not add hard failures or warnings.
+These signals identify page-layout elements that may need review before reusing the extracted text. They are supporting evidence and are counted separately from warning checks.
 
 - table_marker_artifacts: 0
 - running_furniture_blocks: 2
 - visual_anchor_blocks: 1
 - ambiguous_image_blocks: 1
 
+The same image block can appear in both `visual_anchor_blocks` and `ambiguous_image_blocks`: `visual_anchor_blocks` counts image blocks, while `ambiguous_image_blocks` flags image blocks with no extracted text context.
+
 Details:
 - running_furniture: p12-texts-555: type=header, text='Technologies 2019 , 7 , 65'
 - running_furniture: p12-texts-556: type=header, text='12 of 19'
 - visual_anchor: p12-pictures-14: type=image, text=<empty>
 - ambiguous_image: p12-pictures-14: type=image, text=<empty>
+
+## Check Results
+Each section below is a separate check.
+
+- Required Field Coverage checks whether required JSON fields are present.
+- Provenance Completeness checks whether source, page, and bounding-box metadata is present.
+- BBox Sanity checks whether bounding boxes look structurally valid.
+- Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.
+- Text Usefulness flags very short or repeated text fragments.
 
 ## Required Field Coverage
 PASS
@@ -85,9 +97,14 @@ WARN
 - p12-texts-617: very short text: '325'
 - p12-texts-622: very short text: '(c)'
 - p12-texts-623: very short text: '(d)'
-- duplicate normalized text across blocks: p12-texts-601, p12-texts-608
-- duplicate normalized text across blocks: p12-texts-603, p12-texts-614, p12-texts-619
-- duplicate normalized text across blocks: p12-texts-604, p12-texts-605, p12-texts-615
-- duplicate normalized text across blocks: p12-texts-606, p12-texts-616
-- duplicate normalized text across blocks: p12-texts-613, p12-texts-618
-- duplicate normalized text across blocks: p12-texts-617, p12-texts-621
+- repeated text value '0.5' appears in block IDs: p12-texts-601, p12-texts-608
+- repeated text value '175' appears in block IDs: p12-texts-603, p12-texts-614, p12-texts-619
+- repeated text value '225' appears in block IDs: p12-texts-604, p12-texts-605, p12-texts-615
+- repeated text value '275' appears in block IDs: p12-texts-606, p12-texts-616
+- repeated text value '125' appears in block IDs: p12-texts-613, p12-texts-618
+- repeated text value '325' appears in block IDs: p12-texts-617, p12-texts-621
+
+## Recommended Review Actions
+Because the decision is REVIEW, inspect short/repeated text fragments and layout/noise signals before using this output for Markdown export, RAG ingestion preparation, or manual extraction.
+If the listed items are expected chart labels, headers, footers, or figure labels, keep, exclude, or describe them according to the downstream use case. If they point to missing or incorrect content, adjust extraction before reuse.
+The report identifies parser-output findings; it does not automatically fix, remove, or approve blocks.
