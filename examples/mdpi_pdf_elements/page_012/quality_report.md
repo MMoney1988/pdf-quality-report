@@ -7,17 +7,17 @@
 - decision: REVIEW
 
 ## Interpretation
-Derived from recorded checks and diagnostic signals. This explains the report decision; it does not add new checks or change the decision.
+This section explains the warnings below in plain language. It does not add new checks or change the decision.
 
-- Content vs Noise Ratio is WARN: 79 body-text candidate block(s) and 3 layout/non-body block(s) were found.
-- Layout/non-body examples: 2 header/footer-like block(s) (p12-texts-555 and p12-texts-556) and 1 image/figure-related block(s) (p12-pictures-14).
+- Content vs Noise Ratio is WARN: The report treats 79 blocks as possible main document text. The report treats 3 blocks as possible layout or noise elements.
+- 2 blocks are typed as headers: p12-texts-555 and p12-texts-556. 1 block is typed as image: p12-pictures-14.
 - Text Usefulness is WARN: The report found 28 short or repetitive text item(s).
-- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or page furniture.
+- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or repeated headers, footers, or page labels.
 - Label-shaped fragments such as '(a)', '(c)', and '(d)' are common in figure labels or layout fragments.
 - Repeated text appears in 6 group(s). Examples: Repeated value '0.5' appears in p12-texts-601 and p12-texts-608; Repeated value '175' appears in p12-texts-603, p12-texts-614, and p12-texts-619; Repeated value '225' appears in p12-texts-604, p12-texts-605, and p12-texts-615.
-- Review these fragments before downstream use.
-- Diagnostic layout signals are present and do not change the decision.
-- Ambiguous image signal(s): 1 signal(s), including p12-pictures-14. These may point to the same image block already listed above.
+- Review these fragments before Markdown export, RAG ingestion preparation, or manual extraction.
+- These layout findings should be checked, but they do not count as hard failures.
+- p12-pictures-14 is typed as image and has empty text. This finding should be checked, but it does not count as a hard failure.
 
 ## Noise / Layout Signals
 Diagnostic signals only; these do not add hard failures or warnings.

@@ -13,8 +13,8 @@ from .interpret import interpret_quality_report
 from .models import CheckResult, NoiseLayoutSignals, QualityReport
 
 INTERPRETATION_NOTE = (
-    "Derived from recorded checks and diagnostic signals. "
-    "This explains the report decision; it does not add new checks or change the decision."
+    "This section explains the warnings below in plain language. "
+    "It does not add new checks or change the decision."
 )
 
 

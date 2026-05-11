@@ -124,7 +124,7 @@ def test_markdown_report_contains_required_sections() -> None:
     assert "## Summary" in markdown
     assert "- decision: REVIEW" in markdown
     assert "## Interpretation" in markdown
-    assert "Derived from recorded checks and diagnostic signals" in markdown
+    assert "This section explains the warnings below in plain language" in markdown
     assert "## Noise / Layout Signals" in markdown
     assert markdown.index("## Summary") < markdown.index("## Interpretation")
     assert markdown.index("## Interpretation") < markdown.index("## Noise / Layout Signals")

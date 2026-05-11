@@ -15,6 +15,7 @@ _VERY_SHORT_DETAIL_RE = re.compile(r"^(?P<id>[^:]+): very short text: (?P<text>.
 _DUPLICATE_RE = re.compile(r"^duplicate normalized text across blocks: (?P<ids>.+)$")
 _DETAIL_COUNT_RE = re.compile(r"^(?P<name>[a-z_]+)=(?P<count>\d+)$")
 _SIGNAL_ID_RE = re.compile(r"^(?P<id>[^:]+):")
+_SIGNAL_DETAIL_RE = re.compile(r"^(?P<id>[^:]+): type=(?P<type>[^,]+), text=(?P<text>.+)$")
 _NUMERIC_LIKE_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$")
 _LABEL_LIKE_RE = re.compile(r"^\([A-Za-z0-9]+\)$")
 
@@ -52,7 +53,8 @@ def _interpret_content_vs_noise(result: CheckResult, signals: NoiseLayoutSignals
     if content_count is None or layout_count is None:
         bullets = [
             f"{result.name} is {result.status}: {result.summary}.",
-            "Layout/non-body blocks can include headers, footers, images, or separators and should be reviewed.",
+            "Possible layout or noise elements can include headers, footers, images, or separators and "
+            "should be reviewed.",
         ]
         layout_example = _layout_non_body_examples(signals)
         if layout_example:
@@ -61,7 +63,8 @@ def _interpret_content_vs_noise(result: CheckResult, signals: NoiseLayoutSignals
 
     bullets = [
         f"{result.name} is {result.status}: "
-        f"{content_count} body-text candidate block(s) and {layout_count} layout/non-body block(s) were found."
+        f"The report treats {content_count} {_plural(content_count, 'block')} as possible main document text. "
+        f"The report treats {layout_count} {_plural(layout_count, 'block')} as possible layout or noise elements."
     ]
     layout_example = _layout_non_body_examples(signals)
     if layout_example:
@@ -89,7 +92,7 @@ def _interpret_text_usefulness(result: CheckResult) -> list[str]:
     if numeric_examples:
         bullets.append(
             f"Very short numeric fragments such as {_format_quoted_examples(numeric_examples)} "
-            "are common in chart ticks, figure labels, or page furniture."
+            "are common in chart ticks, figure labels, or repeated headers, footers, or page labels."
         )
     if label_examples:
         bullets.append(
@@ -102,7 +105,7 @@ def _interpret_text_usefulness(result: CheckResult) -> list[str]:
         examples = _detail_examples(result.details)
         if examples:
             bullets.append(f"Examples: {examples}.")
-    bullets.append("Review these fragments before downstream use.")
+    bullets.append("Review these fragments before Markdown export, RAG ingestion preparation, or manual extraction.")
     return bullets
 
 
@@ -122,7 +125,7 @@ def _interpret_noise_layout_signals(signals: NoiseLayoutSignals) -> list[str]:
             signals.ambiguous_image_blocks,
         )
     ):
-        bullets.append("Diagnostic layout signals are present and do not change the decision.")
+        bullets.append("These layout findings should be checked, but they do not count as hard failures.")
 
     table_ids = _signal_ids(signals.table_marker_artifacts)
     if table_ids:
@@ -132,10 +135,7 @@ def _interpret_noise_layout_signals(signals: NoiseLayoutSignals) -> list[str]:
 
     ambiguous_ids = _signal_ids(signals.ambiguous_image_blocks)
     if ambiguous_ids:
-        bullets.append(
-            f"Ambiguous image signal(s): {len(ambiguous_ids)} signal(s), including "
-            f"{_format_id_examples(ambiguous_ids)}. These may point to the same image block already listed above."
-        )
+        bullets.extend(_ambiguous_image_bullets(signals.ambiguous_image_blocks))
     return bullets
 
 
@@ -174,16 +174,57 @@ def _leading_count(text: str) -> int | None:
 
 
 def _layout_non_body_examples(signals: NoiseLayoutSignals) -> str | None:
-    furniture_ids = _signal_ids(signals.running_furniture_blocks)
-    image_ids = _signal_ids(signals.visual_anchor_blocks)
-    parts: list[str] = []
-    if furniture_ids:
-        parts.append(f"{len(furniture_ids)} header/footer-like block(s) ({_format_id_examples(furniture_ids)})")
-    if image_ids:
-        parts.append(f"{len(image_ids)} image/figure-related block(s) ({_format_id_examples(image_ids)})")
-    if not parts:
+    bullets: list[str] = []
+    furniture_records = _signal_records(signals.running_furniture_blocks)
+    furniture_ids = [record["id"] for record in furniture_records]
+    explicit_furniture_ids = [
+        record["id"] for record in furniture_records if record["type"] in {"header", "footer"}
+    ]
+    if explicit_furniture_ids and len(explicit_furniture_ids) == len(furniture_ids):
+        bullets.append(
+            f"{len(furniture_ids)} {_plural(len(furniture_ids), 'block')} "
+            f"{_plural_verb(len(furniture_ids))} typed as {_furniture_type_label(furniture_records)}: "
+            f"{_format_id_examples(furniture_ids)}."
+        )
+    elif furniture_ids:
+        bullets.append(
+            f"{len(furniture_ids)} {_plural(len(furniture_ids), 'block')} "
+            f"{_plural_verb(len(furniture_ids))} flagged as header/footer-like: {_format_id_examples(furniture_ids)}."
+        )
+
+    image_records = _signal_records(signals.visual_anchor_blocks)
+    image_ids = [record["id"] for record in image_records]
+    explicit_image_ids = [record["id"] for record in image_records if record["type"] == "image"]
+    if explicit_image_ids and len(explicit_image_ids) == len(image_ids):
+        bullets.append(
+            f"{len(image_ids)} {_plural(len(image_ids), 'block')} "
+            f"{_plural_verb(len(image_ids))} typed as image: {_format_id_examples(image_ids)}."
+        )
+    elif image_ids:
+        bullets.append(
+            f"{len(image_ids)} image/figure-related {_plural(len(image_ids), 'block')}: "
+            f"{_format_id_examples(image_ids)}."
+        )
+
+    if not bullets:
         return None
-    return f"Layout/non-body examples: {_format_phrase_list(parts)}."
+    return " ".join(bullets)
+
+
+def _ambiguous_image_bullets(details: list[str]) -> list[str]:
+    bullets: list[str] = []
+    for record in _signal_records(details):
+        if record["type"] == "image" and record["text"] == "<empty>":
+            bullets.append(
+                f"{record['id']} is typed as image and has empty text. "
+                "This finding should be checked, but it does not count as a hard failure."
+            )
+        else:
+            bullets.append(
+                f"{record['id']} is flagged as an ambiguous image signal. "
+                "This finding should be checked, but it does not count as a hard failure."
+            )
+    return bullets
 
 
 def _signal_ids(details: list[str]) -> list[str]:
@@ -193,6 +234,28 @@ def _signal_ids(details: list[str]) -> list[str]:
         if match:
             ids.append(match.group("id"))
     return ids
+
+
+def _signal_records(details: list[str]) -> list[dict[str, str]]:
+    records: list[dict[str, str]] = []
+    for detail in details:
+        match = _SIGNAL_DETAIL_RE.match(detail)
+        if match:
+            records.append(match.groupdict())
+            continue
+        id_match = _SIGNAL_ID_RE.match(detail)
+        if id_match:
+            records.append({"id": id_match.group("id"), "type": "", "text": ""})
+    return records
+
+
+def _furniture_type_label(records: list[dict[str, str]]) -> str:
+    types = {record["type"] for record in records}
+    if types == {"header"}:
+        return "headers"
+    if types == {"footer"}:
+        return "footers"
+    return "headers/footers"
 
 
 def _very_short_text_by_id(details: list[str]) -> dict[str, str]:
@@ -270,3 +333,11 @@ def _format_phrase_list(items: list[str]) -> str:
 
 def _format_sentence_list(items: list[str]) -> str:
     return "; ".join(items)
+
+
+def _plural(count: int, noun: str) -> str:
+    return noun if count == 1 else f"{noun}s"
+
+
+def _plural_verb(count: int) -> str:
+    return "is" if count == 1 else "are"

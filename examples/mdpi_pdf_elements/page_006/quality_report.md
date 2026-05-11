@@ -7,11 +7,11 @@
 - decision: REVIEW
 
 ## Interpretation
-Derived from recorded checks and diagnostic signals. This explains the report decision; it does not add new checks or change the decision.
+This section explains the warnings below in plain language. It does not add new checks or change the decision.
 
-- Content vs Noise Ratio is WARN: 6 body-text candidate block(s) and 2 layout/non-body block(s) were found.
-- Layout/non-body examples: 2 header/footer-like block(s) (p6-texts-58 and p6-texts-59).
-- Diagnostic layout signals are present and do not change the decision.
+- Content vs Noise Ratio is WARN: The report treats 6 blocks as possible main document text. The report treats 2 blocks as possible layout or noise elements.
+- 2 blocks are typed as headers: p6-texts-58 and p6-texts-59.
+- These layout findings should be checked, but they do not count as hard failures.
 
 ## Noise / Layout Signals
 Diagnostic signals only; these do not add hard failures or warnings.

@@ -126,12 +126,12 @@ Excerpt from the generated page 12 report; later check sections and block-level 
 - decision: REVIEW
 
 ## Interpretation
-Derived from recorded checks and diagnostic signals. This explains the report decision; it does not add new checks or change the decision.
+This section explains the warnings below in plain language. It does not add new checks or change the decision.
 
-- Content vs Noise Ratio is WARN: 79 body-text candidate block(s) and 3 layout/non-body block(s) were found.
-- Layout/non-body examples: 2 header/footer-like block(s) (p12-texts-555 and p12-texts-556) and 1 image/figure-related block(s) (p12-pictures-14).
+- Content vs Noise Ratio is WARN: The report treats 79 blocks as possible main document text. The report treats 3 blocks as possible layout or noise elements.
+- 2 blocks are typed as headers: p12-texts-555 and p12-texts-556. 1 block is typed as image: p12-pictures-14.
 - Text Usefulness is WARN: The report found 28 short or repetitive text item(s).
-- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or page furniture.
+- Very short numeric fragments such as '111', '0.5', and '225' are common in chart ticks, figure labels, or repeated headers, footers, or page labels.
 
 ## Noise / Layout Signals
 - table_marker_artifacts: 0
@@ -140,7 +140,7 @@ Derived from recorded checks and diagnostic signals. This explains the report de
 - ambiguous_image_blocks: 1
 ```
 
-`REVIEW` means the page is structurally usable, but contains warnings or layout/noise signals that should be checked before downstream use.
+`REVIEW` means the page passed the hard structure checks, but layout/noise or text-usefulness warnings should be checked before Markdown export, RAG ingestion preparation, or manual extraction.
 
 ## License
 
