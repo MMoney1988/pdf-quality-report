@@ -27,6 +27,7 @@ docling = [
 pdf-quality-convert = "pdf_quality_report.convert:main"
 pdf-quality-report = "pdf_quality_report.report:main"
 pdf-quality-markdown = "pdf_quality_report.to_markdown:main"
+pdf-quality-chunk = "pdf_quality_report.chunk:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]

@@ -6,8 +6,9 @@ It takes JSON exported by [Docling](https://github.com/docling-project/docling) 
 
 - a small traceable JSON file with text blocks, page numbers, bounding boxes, and provenance
 - a deterministic Markdown quality report that highlights missing fields, broken provenance, invalid bounding boxes, and layout/noise signals
+- provenance-preserving JSONL chunk records from normalized parser output
 
-This project does not try to replace Docling. Docling does the PDF parsing. This repo checks whether the parser output is structured, traceable, and safe enough to review before using it in downstream workflows.
+This project does not try to replace Docling. Docling does the PDF parsing. This repo checks whether the parser output is structured and traceable for human review before downstream use.
 
 It does **not** claim OCR quality, RAG answer quality, table reconstruction, legal extraction, compliance readiness, production extraction accuracy, or enterprise readiness.
 
@@ -83,7 +84,7 @@ python -m pdf_quality_report.report \
 
 ## Export Clean Markdown
 
-Export normalized blocks to clean Markdown with source reference comments for downstream review or RAG ingestion preparation:
+Export normalized blocks to clean Markdown with source reference comments for downstream review or retrieval-oriented preparation:
 
 ```bash
 python -m pdf_quality_report.to_markdown \
@@ -99,6 +100,28 @@ If the package entry point is installed:
 pdf-quality-markdown \
   --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
   --output /tmp/page_012.md
+```
+
+## Export Chunk Records
+
+Export normalized blocks to JSONL chunk records with block IDs, page numbers, bounding-box references, and source metadata
+preserved for downstream review or retrieval-oriented preparation:
+
+```bash
+python -m pdf_quality_report.chunk \
+  --input examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --output /tmp/page_006_chunks.jsonl
+```
+
+Use `--out` as a short alias for `--output`. See [Export Chunk Records](docs/how_to_export_chunk_records.md) for a
+short walkthrough.
+
+If the package entry point is installed:
+
+```bash
+pdf-quality-chunk \
+  --input examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --output /tmp/page_006_chunks.jsonl
 ```
 
 ## Included Examples
@@ -146,7 +169,7 @@ These signals identify page-layout elements that may need review before reusing 
 - ambiguous_image_blocks: 1
 ```
 
-`REVIEW` means the hard structure checks passed, but warning details still need human review before Markdown export, RAG ingestion preparation, or manual extraction.
+`REVIEW` means the hard structure checks passed, but warning details still need human review before Markdown export, retrieval-oriented preparation, or manual extraction.
 
 ## License
 
