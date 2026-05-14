@@ -151,6 +151,8 @@ Documentation assets under `docs/` explain the pipeline and a sample report layo
 - [`docs/pqr_before_after.svg`](docs/pqr_before_after.svg) — illustrative raw parser JSON versus structured quality-report view
 - [`docs/sample_report.html`](docs/sample_report.html) — open locally in a browser for a formatted sample (page 6 example)
 
+**Portfolio layer** (same facts, presentation framing for proposals and embeds): [`docs/portfolio/README.md`](docs/portfolio/README.md).
+
 ## Example Report Output Excerpt
 
 The simplified excerpt below comes from page 12 of the included MDPI research-paper example. A block is one
