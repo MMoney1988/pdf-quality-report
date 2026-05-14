@@ -16,6 +16,9 @@ BBOX_X1_INDEX = 2
 BBOX_Y1_INDEX = 3
 BBOX_TOLERANCE = 0.0001
 SHORT_TEXT_THRESHOLD = 3
+LOW_TEXT_CHAR_THRESHOLD = 40
+IMAGE_LOW_TEXT_CHAR_THRESHOLD = 120
+EMPTY_TEXT_BLOCK_RATIO_THRESHOLD = 0.5
 
 TEXT_BODY_TYPES = {"heading", "paragraph", "list_item_text", "caption", "footnote", "table"}
 TEXT_BEARING_TYPES = TEXT_BODY_TYPES | {"header", "footer"}
@@ -39,7 +42,7 @@ REQUIRED_PROVENANCE_FIELDS = (
 
 
 def run_quality_checks(uif_document: dict[str, Any]) -> QualityReport:
-    """Run the five v0 checks on a normalized block document."""
+    """Run the v0 checks on a normalized block document."""
     blocks = _blocks(uif_document)
     results = [
         check_required_field_coverage(uif_document),
@@ -47,6 +50,7 @@ def run_quality_checks(uif_document: dict[str, Any]) -> QualityReport:
         check_bbox_sanity(blocks),
         check_content_vs_noise_ratio(blocks),
         check_text_usefulness(blocks),
+        check_text_extraction_health(blocks),
     ]
     return QualityReport(
         total_blocks=len(blocks),
@@ -217,6 +221,70 @@ def check_text_usefulness(blocks: list[dict[str, Any]]) -> CheckResult:
         status = "PASS"
     summary = _summary_from_issues("text usefulness", failures, warnings)
     return CheckResult("Text Usefulness", status, summary, [*failures, *warnings])
+
+
+def check_text_extraction_health(blocks: list[dict[str, Any]]) -> CheckResult:
+    """Check extracted-text availability without judging text correctness."""
+    total_blocks = len(blocks)
+    text_bearing_blocks = 0
+    non_empty_text_blocks = 0
+    total_text_chars = 0
+    image_blocks = 0
+
+    for block in blocks:
+        block_type = str(block.get("type", "unknown"))
+        if block_type == "image":
+            image_blocks += 1
+        if block_type not in TEXT_BEARING_TYPES:
+            continue
+        text_bearing_blocks += 1
+        normalized_text = _normalize_text(_content_text(block))
+        if normalized_text:
+            non_empty_text_blocks += 1
+            total_text_chars += len(normalized_text)
+
+    empty_text_blocks = text_bearing_blocks - non_empty_text_blocks
+    empty_text_block_ratio = empty_text_blocks / text_bearing_blocks if text_bearing_blocks else 0.0
+    details = [
+        f"text_bearing_blocks={text_bearing_blocks}",
+        f"non_empty_text_blocks={non_empty_text_blocks}",
+        f"empty_text_blocks={empty_text_blocks}",
+        f"total_text_chars={total_text_chars}",
+        f"image_blocks={image_blocks}",
+        f"empty_text_block_ratio={empty_text_block_ratio:.3f}",
+    ]
+
+    warnings: list[str] = []
+    if total_blocks == 0:
+        warnings.append("no_blocks: document has no blocks to evaluate")
+    if total_blocks > 0 and text_bearing_blocks == 0:
+        warnings.append("no_text_bearing_blocks: document has blocks but no text-bearing blocks")
+    if text_bearing_blocks > 0 and non_empty_text_blocks == 0:
+        warnings.append("no_non_empty_text_blocks: text-bearing blocks contain no extracted text")
+    if total_blocks > 0 and total_text_chars < LOW_TEXT_CHAR_THRESHOLD:
+        warnings.append(
+            f"low_text_coverage: total_text_chars={total_text_chars} below threshold={LOW_TEXT_CHAR_THRESHOLD}"
+        )
+    if image_blocks > 0 and total_text_chars < IMAGE_LOW_TEXT_CHAR_THRESHOLD:
+        warnings.append(
+            "image_low_text_coverage: document contains image blocks while extracted text remains very limited "
+            f"(total_text_chars={total_text_chars} below threshold={IMAGE_LOW_TEXT_CHAR_THRESHOLD})"
+        )
+    if text_bearing_blocks > 0 and empty_text_block_ratio > EMPTY_TEXT_BLOCK_RATIO_THRESHOLD:
+        warnings.append(
+            "high_empty_text_block_ratio: "
+            f"empty_text_block_ratio={empty_text_block_ratio:.3f} "
+            f"above threshold={EMPTY_TEXT_BLOCK_RATIO_THRESHOLD:.3f}"
+        )
+
+    if warnings:
+        summary = (
+            "document has no blocks to evaluate"
+            if total_blocks == 0
+            else f"{len(warnings)} text extraction health warning(s)"
+        )
+        return CheckResult("Text Extraction Health", "WARN", summary, [*details, *warnings])
+    return CheckResult("Text Extraction Health", "PASS", "extracted text availability checks passed", details)
 
 
 def _blocks(uif_document: dict[str, Any]) -> list[dict[str, Any]]:

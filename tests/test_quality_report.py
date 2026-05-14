@@ -15,7 +15,13 @@ def _valid_block(block_id: str, block_type: str = "paragraph") -> dict:
         "bbox": [1.0, 2.0, 3.0, 4.0],
         "relationships": [],
         "reading_order_index": 0,
-        "content": {"text": "Useful text", "spans": []},
+        "content": {
+            "text": (
+                "Useful extracted text with enough characters for deterministic health checks. "
+                "This sentence keeps ordinary valid fixtures above the image-text warning threshold."
+            ),
+            "spans": [],
+        },
         "provenance": {
             "parser_backend": "docling",
             "docling_schema": "DoclingDocument",
@@ -50,6 +56,7 @@ def test_quality_checks_pass_hard_checks_and_warn_for_noise() -> None:
     assert statuses["Provenance Completeness"] == "PASS"
     assert statuses["BBox Sanity"] == "PASS"
     assert statuses["Content vs Noise Ratio"] == "WARN"
+    assert statuses["Text Extraction Health"] == "PASS"
     assert report.hard_failures == 0
     assert report.warnings == 1
     assert report.decision == "REVIEW"
@@ -113,6 +120,101 @@ def test_noise_layout_signals_capture_table_furniture_and_images() -> None:
     assert report.hard_failures == 0
 
 
+def test_text_extraction_health_passes_when_text_is_available() -> None:
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [_valid_block("p6-texts-48")]})
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    assert health.status == "PASS"
+    assert health.summary == "extracted text availability checks passed"
+    assert "text_bearing_blocks=1" in health.details
+    assert "non_empty_text_blocks=1" in health.details
+    assert "empty_text_blocks=0" in health.details
+    assert "image_blocks=0" in health.details
+    assert "empty_text_block_ratio=0.000" in health.details
+
+
+def test_text_extraction_health_warns_without_hard_failure() -> None:
+    image = _valid_block("p6-pictures-4", "image")
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [image]})
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    assert health.status == "WARN"
+    assert "text_bearing_blocks=0" in health.details
+    assert "non_empty_text_blocks=0" in health.details
+    assert "empty_text_blocks=0" in health.details
+    assert "total_text_chars=0" in health.details
+    assert "image_blocks=1" in health.details
+    assert "empty_text_block_ratio=0.000" in health.details
+    assert "no_text_bearing_blocks: document has blocks but no text-bearing blocks" in health.details
+    assert "low_text_coverage: total_text_chars=0 below threshold=40" in health.details
+    assert any(
+        "document contains image blocks while extracted text remains very limited" in detail
+        for detail in health.details
+    )
+    assert health.status != "FAIL"
+    assert report.hard_failures == 0
+    assert report.decision == "REVIEW"
+
+
+def test_text_extraction_health_warns_when_text_bearing_blocks_are_empty_without_body_failures() -> None:
+    header = _valid_block("p6-texts-45", "header")
+    header["content"]["text"] = ""
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [header]})
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    text_usefulness = next(result for result in report.results if result.name == "Text Usefulness")
+    assert health.status == "WARN"
+    assert text_usefulness.status == "PASS"
+    assert "text_bearing_blocks=1" in health.details
+    assert "non_empty_text_blocks=0" in health.details
+    assert "no_non_empty_text_blocks: text-bearing blocks contain no extracted text" in health.details
+    assert health.status != "FAIL"
+    assert report.hard_failures == 0
+    assert report.decision == "REVIEW"
+
+
+def test_text_extraction_health_warns_for_empty_text_ratio() -> None:
+    empty_body = _valid_block("p6-texts-49")
+    empty_body["content"]["text"] = ""
+    filled_body = _valid_block("p6-texts-50")
+    filled_body["content"]["text"] = (
+        "Enough extracted text to avoid the low-text threshold for this specific ratio case."
+    )
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [empty_body, filled_body]})
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    assert health.status == "PASS"
+    assert "empty_text_block_ratio=0.500" in health.details
+
+    second_empty_body = _valid_block("p6-texts-51")
+    second_empty_body["content"]["text"] = ""
+    report = run_quality_checks(
+        {"metadata": {"source": "test"}, "blocks": [empty_body, second_empty_body, filled_body]}
+    )
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    text_usefulness = next(result for result in report.results if result.name == "Text Usefulness")
+    assert health.status == "WARN"
+    assert text_usefulness.status == "FAIL"
+    assert "empty_text_block_ratio=0.667" in health.details
+    assert any("high_empty_text_block_ratio" in detail for detail in health.details)
+    assert health.status != "FAIL"
+    assert report.hard_failures == 1
+
+
+def test_text_extraction_health_warns_when_document_has_no_blocks() -> None:
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": []})
+
+    health = next(result for result in report.results if result.name == "Text Extraction Health")
+    assert health.status == "WARN"
+    assert health.summary == "document has no blocks to evaluate"
+    assert "no_blocks: document has no blocks to evaluate" in health.details
+    assert report.hard_failures == 0
+
+
 def test_markdown_report_contains_required_sections() -> None:
     table_marker = _valid_block("p12-texts-109")
     table_marker["content"]["text"] = "+"
@@ -135,6 +237,8 @@ def test_markdown_report_contains_required_sections() -> None:
     assert "table_marker_artifacts: 1" in markdown
     assert "## Required Field Coverage" in markdown
     assert "## Text Usefulness" in markdown
+    assert "## Text Extraction Health" in markdown
+    assert "Text Extraction Health checks extracted-text availability, not extracted-text correctness." in markdown
 
 
 def test_cli_writes_quality_report(tmp_path: Path) -> None:
@@ -149,3 +253,19 @@ def test_cli_writes_quality_report(tmp_path: Path) -> None:
     assert "hard_failures: 0" in report_text
     assert "decision: GO" in report_text
     assert "This does not prove complete or semantically correct extraction" in report_text
+
+
+def test_cli_exits_zero_when_only_text_extraction_health_warns(tmp_path: Path) -> None:
+    uif_path = tmp_path / "uif.json"
+    report_path = tmp_path / "quality_report.md"
+    block = _valid_block("p6-unknown-1", "unknown")
+    block["content"]["text"] = ""
+    uif_path.write_text(json.dumps({"metadata": {}, "blocks": [block]}), encoding="utf-8")
+
+    assert main(["--input", str(uif_path), "--output", str(report_path)]) == 0
+
+    report_text = report_path.read_text(encoding="utf-8")
+    assert "hard_failures: 0" in report_text
+    assert "decision: REVIEW" in report_text
+    assert "## Text Extraction Health" in report_text
+    assert "no_text_bearing_blocks: document has blocks but no text-bearing blocks" in report_text

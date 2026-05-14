@@ -121,6 +121,40 @@ def test_text_usefulness_duplicate_falls_back_to_ids_when_value_is_not_available
     assert any("p12-texts-700 and p12-texts-701" in bullet for bullet in bullets)
 
 
+def test_text_extraction_health_warn_gets_conservative_explanation() -> None:
+    report = _report(
+        [
+            CheckResult(
+                "Text Extraction Health",
+                "WARN",
+                "3 text extraction health warning(s)",
+                [
+                    "text_bearing_blocks=1",
+                    "non_empty_text_blocks=0",
+                    "empty_text_blocks=1",
+                    "total_text_chars=0",
+                    "image_blocks=1",
+                    "empty_text_block_ratio=1.000",
+                    "no_non_empty_text_blocks: text-bearing blocks contain no extracted text",
+                    "low_text_coverage: total_text_chars=0 below threshold=40",
+                    "image_low_text_coverage: document contains image blocks while extracted text remains very limited "
+                    "(total_text_chars=0 below threshold=120)",
+                ],
+            )
+        ]
+    )
+
+    bullets = interpret_quality_report(report)
+
+    assert any("Text Extraction Health is WARN" in bullet for bullet in bullets)
+    assert any("0 non-empty text-bearing blocks out of 1" in bullet for bullet in bullets)
+    assert any("does not judge text correctness" in bullet for bullet in bullets)
+    assert any("image presence is only a review signal" in bullet for bullet in bullets)
+    assert not any("failed" in bullet.lower() for bullet in bullets)
+    assert not any("supports OCR" in bullet for bullet in bullets)
+    assert report.decision == "REVIEW"
+
+
 def test_bbox_failure_gets_failure_explanation_without_decision_change() -> None:
     report = _report(
         [

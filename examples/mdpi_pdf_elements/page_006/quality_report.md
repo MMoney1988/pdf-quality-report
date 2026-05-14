@@ -33,6 +33,7 @@ Each section below is a separate check.
 - BBox Sanity checks whether bounding boxes look structurally valid.
 - Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.
 - Text Usefulness flags very short or repeated text fragments.
+- Text Extraction Health checks extracted-text availability, not extracted-text correctness.
 
 ## Required Field Coverage
 PASS
@@ -63,6 +64,18 @@ WARN
 PASS
 
 text usefulness checks passed
+
+## Text Extraction Health
+PASS
+
+extracted text availability checks passed
+
+- text_bearing_blocks=8
+- non_empty_text_blocks=8
+- empty_text_blocks=0
+- total_text_chars=5040
+- image_blocks=0
+- empty_text_block_ratio=0.000
 
 ## Recommended Review Actions
 Because the decision is REVIEW, inspect layout/noise signals before using this output for Markdown export, RAG ingestion preparation, or manual extraction.
