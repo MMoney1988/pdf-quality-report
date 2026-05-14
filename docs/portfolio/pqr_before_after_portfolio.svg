@@ -63,8 +63,8 @@
     <text x="358" y="182" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="800">Review layer</text>
     <text x="358" y="200" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="600">Deterministic checks</text>
     <text x="358" y="216" text-anchor="middle" fill="#64748b" font-size="9" font-weight="600">PQR</text>
-    <text x="358" y="248" text-anchor="middle" fill="#4338ca" font-size="52" font-weight="800" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" paint-order="stroke fill" stroke="#312e81" stroke-width="1.2">→</text>
-    <text x="358" y="284" text-anchor="middle" fill="#64748b" font-size="9" font-weight="500">onto report + exports</text>
+    <text x="358" y="272" text-anchor="middle" fill="#4338ca" font-size="52" font-weight="800" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif" paint-order="stroke fill" stroke="#312e81" stroke-width="1.2">→</text>
+    <text x="358" y="308" text-anchor="middle" fill="#64748b" font-size="9" font-weight="500">onto report + exports</text>
 
     <g transform="translate(36,0)">
     <!-- AFTER PANEL -->
