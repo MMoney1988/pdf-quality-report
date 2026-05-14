@@ -1,6 +1,6 @@
 <svg viewBox="0 0 796 536" xmlns="http://www.w3.org/2000/svg" role="img" style="font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;">
-  <title>PQR Before/After Comparison</title>
-  <desc>Side-by-side comparison: narrow Before card hugs raw JSON; a tinted center lane marks the PQR engine step; arrow and labels lead into the structured report on the right.</desc>
+  <title>Parser output — Before / After</title>
+  <desc>Side-by-side comparison: narrow Before card hugs raw JSON; a tinted center lane labels the review layer (deterministic checks, PQR); a typographic flow mark leads into the structured report.</desc>
 
   <defs>
     <filter id="pqrPanelShadow" x="-6%" y="-4%" width="112%" height="108%">
@@ -14,11 +14,11 @@
   <text x="398" y="38" text-anchor="middle" fill="#94a3b8" font-size="10">Illustrative comparison (sample page)</text>
 
   <g transform="translate(10, 52)">
-    <!-- BEFORE PANEL (narrower: right edge hugs parsed JSON so the center lane reads as the engine) -->
-    <rect x="0" y="0" width="312" height="472" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#pqrPanelShadow)"/>
-    <rect x="0" y="0" width="312" height="42" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
-    <rect x="0" y="28" width="312" height="14" fill="#fef2f2"/>
-    <text x="156" y="28" text-anchor="middle" fill="#b91c1c" font-size="13" font-weight="700">Before — Raw Parser Output</text>
+    <!-- BEFORE PANEL (tight to monospace sample — widens the center “review lane”) -->
+    <rect x="0" y="0" width="290" height="472" rx="10" fill="#ffffff" stroke="#e2e8f0" stroke-width="1" filter="url(#pqrPanelShadow)"/>
+    <rect x="0" y="0" width="290" height="42" rx="10" fill="#fef2f2" stroke="#fecaca" stroke-width="1"/>
+    <rect x="0" y="28" width="290" height="14" fill="#fef2f2"/>
+    <text x="145" y="28" text-anchor="middle" fill="#b91c1c" font-size="13" font-weight="700">Before — Raw Parser Output</text>
 
     <text x="14" y="62" fill="#475569" font-size="9.5" font-family="ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace">
       <tspan x="14" dy="0">{"_name":"","type":"pdf-document",</tspan>
@@ -45,7 +45,7 @@
       <tspan x="14" dy="14">.2,"t":710.5,"r":540.1,"b":722.8 ...</tspan>
     </text>
 
-    <line x1="12" y1="368" x2="300" y2="368" stroke="#fecaca" stroke-width="1" stroke-dasharray="4 4"/>
+    <line x1="12" y1="368" x2="278" y2="368" stroke="#fecaca" stroke-width="1" stroke-dasharray="4 4"/>
 
     <text x="14" y="384" fill="#b91c1c" font-size="10" font-weight="600">Typical gaps</text>
     <text x="14" y="400" fill="#991b1b" font-size="9.5">
@@ -57,14 +57,14 @@
       <tspan x="14" dy="14">• Raw JSON not review-ready</tspan>
     </text>
 
-    <!-- PQR engine lane: highlights the center as the active step between raw JSON and report -->
-    <rect x="312" y="36" width="114" height="432" rx="18" fill="#e0e7ff" fill-opacity="0.62" stroke="#6366f1" stroke-opacity="0.55" stroke-width="1.5"/>
+    <!-- Review lane: not a second parser — checks + report on normalized blocks -->
+    <rect x="290" y="36" width="136" height="432" rx="18" fill="#e0e7ff" fill-opacity="0.62" stroke="#6366f1" stroke-opacity="0.55" stroke-width="1.5"/>
 
-    <!-- Left-to-right flow (wider gutter for readable type) -->
-    <text x="369" y="198" text-anchor="middle" fill="#0f172a" font-size="16" font-weight="800">PQR</text>
-    <text x="369" y="220" text-anchor="middle" fill="#475569" font-size="12" font-weight="600">checks → report</text>
-    <line x1="322" y1="244" x2="398" y2="244" stroke="#4f46e5" stroke-width="5" stroke-linecap="round"/>
-    <polygon points="398,230 418,244 398,258" fill="#4f46e5"/>
+    <text x="358" y="182" text-anchor="middle" fill="#0f172a" font-size="14" font-weight="800">Review layer</text>
+    <text x="358" y="200" text-anchor="middle" fill="#475569" font-size="10.5" font-weight="600">Deterministic checks</text>
+    <text x="358" y="216" text-anchor="middle" fill="#64748b" font-size="9" font-weight="600">PQR</text>
+    <text x="358" y="252" text-anchor="middle" fill="#4f46e5" font-size="46" font-weight="200" font-family="ui-sans-serif, system-ui, -apple-system, sans-serif">→</text>
+    <text x="358" y="278" text-anchor="middle" fill="#64748b" font-size="9" font-weight="500">onto report + exports</text>
 
     <g transform="translate(36,0)">
     <!-- AFTER PANEL -->
