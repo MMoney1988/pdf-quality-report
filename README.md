@@ -22,13 +22,19 @@ The report answers three practical questions:
 2. Can each block be traced back to a source page and bounding box?
 3. Does the page contain layout noise that a human should review before using the output?
 
-The five current checks are:
+The six current checks are:
 
 1. Required field coverage: are core fields such as `id`, `type`, `page_number`, `bbox`, and `reading_order_index` present?
 2. Provenance completeness: can each block be traced back to Docling metadata and the source PDF?
 3. BBox sanity: are bounding boxes present, finite, and ordered correctly?
 4. Content vs noise ratio: how much looks like document content compared with headers, footers, images, or other secondary blocks?
 5. Text usefulness: are text blocks empty, suspiciously short, or duplicated?
+6. Text extraction health: is extracted text available in the normalized blocks for review, without judging whether the text is correct?
+
+Text usefulness flags local text-quality issues such as empty body blocks, very short text, or repeated fragments.
+Text extraction health summarizes whether the document contains enough extracted text overall for review.
+
+Warning-only checks can move the report to `REVIEW`; the report CLI still exits non-zero only for hard failures.
 
 It also lists diagnostic noise/layout signals such as table-marker artifacts, headers/footers, and ambiguous image blocks. These signals are for review only; they do not add hard failures or warnings by themselves.
 
@@ -139,9 +145,9 @@ The tests use small synthetic Docling-style JSON fixtures, not the committed MDP
 
 ## Example Report Output Excerpt
 
-The excerpt below comes from page 12 of the included MDPI research-paper example. A block is one extracted
-page element, such as text, a header, an image, or a caption. Later check sections and block-level warning
-details are not shown.
+The simplified excerpt below comes from page 12 of the included MDPI research-paper example. A block is one
+extracted page element, such as text, a header, an image, or a caption. Later check sections and block-level
+warning details are not shown.
 
 ```markdown
 ## Summary

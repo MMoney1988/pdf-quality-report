@@ -19,6 +19,7 @@ CHECK_RESULT_EXPLANATIONS = (
     "BBox Sanity checks whether bounding boxes look structurally valid.",
     "Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.",
     "Text Usefulness flags very short or repeated text fragments.",
+    "Text Extraction Health checks extracted-text availability, not extracted-text correctness.",
 )
 
 
@@ -220,6 +221,8 @@ def _review_targets(report: QualityReport) -> str:
     targets: list[str] = []
     if "Text Usefulness" in warning_names:
         targets.append("short/repeated text fragments")
+    if "Text Extraction Health" in warning_names:
+        targets.append("extracted-text availability")
     if "Content vs Noise Ratio" in warning_names or any(
         (
             report.noise_layout_signals.table_marker_artifacts,

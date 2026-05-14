@@ -44,6 +44,7 @@ Each section below is a separate check.
 - BBox Sanity checks whether bounding boxes look structurally valid.
 - Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.
 - Text Usefulness flags very short or repeated text fragments.
+- Text Extraction Health checks extracted-text availability, not extracted-text correctness.
 
 ## Required Field Coverage
 PASS
@@ -103,6 +104,18 @@ WARN
 - repeated text value '275' appears in block IDs: p12-texts-606, p12-texts-616
 - repeated text value '125' appears in block IDs: p12-texts-613, p12-texts-618
 - repeated text value '325' appears in block IDs: p12-texts-617, p12-texts-621
+
+## Text Extraction Health
+PASS
+
+extracted text availability checks passed
+
+- text_bearing_blocks=81
+- non_empty_text_blocks=81
+- empty_text_blocks=0
+- total_text_chars=4482
+- image_blocks=1
+- empty_text_block_ratio=0.000
 
 ## Recommended Review Actions
 Because the decision is REVIEW, inspect short/repeated text fragments and layout/noise signals before using this output for Markdown export, RAG ingestion preparation, or manual extraction.

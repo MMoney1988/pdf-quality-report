@@ -15,6 +15,7 @@ _VERY_SHORT_DETAIL_RE = re.compile(r"^(?P<id>[^:]+): very short text: (?P<text>.
 _DUPLICATE_RE = re.compile(r"^duplicate normalized text across blocks: (?P<ids>.+)$")
 _REPEATED_VALUE_RE = re.compile(r"^repeated text value (?P<text>.+) appears in block IDs: (?P<ids>.+)$")
 _DETAIL_COUNT_RE = re.compile(r"^(?P<name>[a-z_]+)=(?P<count>\d+)$")
+_DETAIL_FLOAT_RE = re.compile(r"^(?P<name>[a-z_]+)=(?P<value>\d+(?:\.\d+)?)$")
 _SIGNAL_ID_RE = re.compile(r"^(?P<id>[^:]+):")
 _SIGNAL_DETAIL_RE = re.compile(r"^(?P<id>[^:]+): type=(?P<type>[^,]+), text=(?P<text>.+)$")
 _NUMERIC_LIKE_RE = re.compile(r"^[+-]?(?:\d+(?:\.\d*)?|\.\d+)$")
@@ -40,6 +41,8 @@ def interpret_quality_report(report: QualityReport) -> list[str]:
 def _interpret_result(result: CheckResult, signals: NoiseLayoutSignals) -> list[str]:
     if result.name == "Text Usefulness":
         return _interpret_text_usefulness(result)
+    if result.name == "Text Extraction Health":
+        return _interpret_text_extraction_health(result)
     if result.name == "Content vs Noise Ratio":
         return _interpret_content_vs_noise(result, signals)
     if result.name == "BBox Sanity":
@@ -117,6 +120,49 @@ def _interpret_text_usefulness(result: CheckResult) -> list[str]:
     return bullets
 
 
+def _interpret_text_extraction_health(result: CheckResult) -> list[str]:
+    counts = _detail_counts(result.details)
+    ratios = _detail_floats(result.details)
+    text_bearing_blocks = counts.get("text_bearing_blocks")
+    non_empty_text_blocks = counts.get("non_empty_text_blocks")
+    empty_text_blocks = counts.get("empty_text_blocks")
+    total_text_chars = counts.get("total_text_chars")
+    image_blocks = counts.get("image_blocks")
+    empty_text_block_ratio = ratios.get("empty_text_block_ratio")
+
+    if None in (text_bearing_blocks, non_empty_text_blocks, empty_text_blocks, total_text_chars, image_blocks):
+        return [
+            f"{result.name} is {result.status}: {result.summary}. "
+            "This check evaluates whether extracted text is available for review; it does not judge text correctness."
+        ]
+
+    ratio_text = (
+        f"{empty_text_block_ratio:.3f}"
+        if empty_text_block_ratio is not None
+        else "not available"
+    )
+    bullets = [
+        f"{result.name} is {result.status}: This report found "
+        f"{non_empty_text_blocks} non-empty text-bearing {_plural(non_empty_text_blocks, 'block')} "
+        f"out of {text_bearing_blocks}, with {total_text_chars} extracted text characters."
+    ]
+    bullets.append(
+        "This check evaluates extracted-text availability for review; it does not judge text correctness, "
+        "OCR behavior, or parser accuracy."
+    )
+    if image_blocks:
+        bullets.append(
+            f"The normalized output includes {image_blocks} image {_plural(image_blocks, 'block')}; "
+            "image presence is only a review signal when extracted text remains limited."
+        )
+    if empty_text_blocks:
+        bullets.append(
+            f"{empty_text_blocks} text-bearing {_plural(empty_text_blocks, 'block')} "
+            f"had no extracted text. The empty text-block ratio is {ratio_text}."
+        )
+    return bullets
+
+
 def _interpret_generic_result(result: CheckResult) -> str:
     examples = _detail_examples(result.details)
     suffix = f" Examples: {examples}." if examples else ""
@@ -177,6 +223,15 @@ def _detail_counts(details: list[str]) -> dict[str, int]:
         if match:
             counts[match.group("name")] = int(match.group("count"))
     return counts
+
+
+def _detail_floats(details: list[str]) -> dict[str, float]:
+    values: dict[str, float] = {}
+    for detail in details:
+        match = _DETAIL_FLOAT_RE.match(detail)
+        if match:
+            values[match.group("name")] = float(match.group("value"))
+    return values
 
 
 def _leading_count(text: str) -> int | None:
