@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PQR Sample Report — Portfolio (Page 006)</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #0f172a;
+    color: #1e293b;
+    line-height: 1.6;
+    min-height: 100vh;
+  }
+  .shell {
+    max-width: 840px;
+    margin: 0 auto;
+    padding: 0 0 48px;
+  }
+  .topbar {
+    background: linear-gradient(90deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #e2e8f0;
+    padding: 16px 24px 20px;
+    border-bottom: 1px solid #334155;
+  }
+  .topbar-inner { max-width: 800px; margin: 0 auto; }
+  .topbar h1 { font-size: 15px; font-weight: 700; letter-spacing: 0.02em; color: #f8fafc; }
+  .topbar p { font-size: 12px; color: #94a3b8; margin-top: 6px; }
+  .badge {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    padding: 4px 10px;
+    border-radius: 6px;
+    background: #312e81;
+    color: #c7d2fe;
+    border: 1px solid #4f46e5;
+  }
+  .content {
+    background: linear-gradient(180deg, #e2e8f0 0%, #f1f5f9 32px, #f8fafc 100%);
+    padding: 28px 20px 8px;
+  }
+  .content-inner { max-width: 800px; margin: 0 auto; }
+  h1.page-title { font-size: 22px; font-weight: 700; margin-bottom: 4px; letter-spacing: -0.02em; color: #0f172a; }
+  .subtitle { color: #64748b; font-size: 13px; margin-bottom: 24px; }
+  .card {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 22px;
+    margin-bottom: 16px;
+    box-shadow: 0 1px 2px rgba(15, 23, 42, 0.05), 0 8px 24px rgba(15, 23, 42, 0.08);
+  }
+  .card h2 { font-size: 13px; font-weight: 700; color: #475569; text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 14px; }
+  .decision { display: inline-flex; align-items: center; gap: 8px; margin-bottom: 16px; }
+  .badge-review { display: inline-block; padding: 5px 16px; border-radius: 20px; font-size: 13px; font-weight: 700; background: #fef3c7; color: #b45309; border: 1px solid #fbbf24; }
+  .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-bottom: 4px; }
+  .stat { text-align: center; padding: 14px 12px; background: #f8fafc; border-radius: 10px; border: 1px solid #f1f5f9; }
+  .stat-value { font-size: 26px; font-weight: 700; color: #0f172a; }
+  .stat-label { font-size: 11px; color: #64748b; text-transform: uppercase; letter-spacing: 0.04em; margin-top: 4px; }
+  .stat-warn .stat-value { color: #d97706; }
+  .check { display: flex; align-items: flex-start; gap: 12px; padding: 12px 0; border-bottom: 1px solid #f1f5f9; }
+  .check:last-child { border-bottom: none; }
+  .check-icon { width: 22px; height: 22px; border-radius: 50%; flex-shrink: 0; margin-top: 1px; display: flex; align-items: center; justify-content: center; }
+  .check-pass { background: #dcfce7; }
+  .check-pass::after { content: '✓'; color: #15803d; font-size: 12px; font-weight: 700; }
+  .check-warn { background: #fef3c7; }
+  .check-warn::after { content: '!'; color: #d97706; font-size: 12px; font-weight: 700; }
+  .check-name { font-size: 14px; font-weight: 600; color: #0f172a; }
+  .check-detail { font-size: 12px; color: #64748b; margin-top: 3px; }
+  .check-metrics { font-size: 11px; color: #94a3b8; font-family: ui-monospace, monospace; margin-top: 4px; }
+  .interpretation { font-size: 14px; color: #475569; }
+  .interpretation li { margin-bottom: 8px; }
+  .interpretation ul { padding-left: 18px; }
+  .signal-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .signal { padding: 10px 12px; background: #f8fafc; border-radius: 8px; font-size: 12px; border: 1px solid #f1f5f9; }
+  .signal-name { color: #64748b; }
+  .signal-value { font-weight: 600; color: #0f172a; }
+  .signal-detail { font-size: 11px; color: #64748b; margin-top: 10px; font-family: ui-monospace, monospace; padding: 10px; background: #f1f5f9; border-radius: 8px; }
+  .health-row { display: flex; justify-content: space-between; font-size: 12px; padding: 5px 0; }
+  .health-label { color: #64748b; }
+  .health-value { font-weight: 600; color: #0f172a; font-family: ui-monospace, monospace; }
+  .action-box { background: #fffbeb; border: 1px solid #fde68a; border-radius: 10px; padding: 16px; font-size: 13px; color: #92400e; line-height: 1.55; }
+  .footer { text-align: center; color: #64748b; font-size: 11px; margin-top: 8px; padding: 20px 16px 0; max-width: 800px; margin-left: auto; margin-right: auto; }
+  .footer a { color: #4f46e5; text-decoration: none; font-weight: 600; }
+  .footer a:hover { text-decoration: underline; }
+  .footer-strip { margin-top: 12px; font-size: 10px; color: #94a3b8; }
+</style>
+</head>
+<body>
+<div class="shell">
+  <header class="topbar">
+    <div class="topbar-inner">
+      <h1>pdf-quality-report</h1>
+      <p>Portfolio presentation layer — same checks as the canonical sample HTML; use for proposals and README embeds.</p>
+      <span class="badge">Documentation sample</span>
+    </div>
+  </header>
+  <div class="content">
+    <div class="content-inner">
+
+<h1 class="page-title">PDF Parser Output Quality Report</h1>
+<p class="subtitle">Source: mdpi_pdf_elements.pdf — Page 6 &nbsp;|&nbsp; Generated by PQR</p>
+
+<div class="card">
+  <h2>Summary</h2>
+  <div class="decision">
+    <span class="badge-review">REVIEW</span>
+  </div>
+  <div class="stats">
+    <div class="stat">
+      <div class="stat-value">8</div>
+      <div class="stat-label">Total Blocks</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value">0</div>
+      <div class="stat-label">Hard Failures</div>
+    </div>
+    <div class="stat stat-warn">
+      <div class="stat-value">1</div>
+      <div class="stat-label">Warnings</div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Interpretation</h2>
+  <div class="interpretation">
+    <p style="margin-bottom: 10px;"><strong>Why REVIEW?</strong> The hard structure checks passed, but one warning check needs review: Content vs Noise Ratio.</p>
+    <ul>
+      <li>Content vs Noise Ratio is <strong>WARN</strong>: 6 blocks classified as main document text, 2 blocks classified as layout or noise elements.</li>
+      <li>2 blocks are typed as headers: <code>p6-texts-58</code> and <code>p6-texts-59</code>.</li>
+      <li>Layout/noise signals point to headers, footers, images, or other non-main-text elements that may need review before reuse.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Check Results</h2>
+
+  <div class="check">
+    <div class="check-icon check-pass"></div>
+    <div>
+      <div class="check-name">Required Field Coverage</div>
+      <div class="check-detail">All required fields present in every block.</div>
+    </div>
+  </div>
+
+  <div class="check">
+    <div class="check-icon check-pass"></div>
+    <div>
+      <div class="check-name">Provenance Completeness</div>
+      <div class="check-detail">Source, page, and bounding-box metadata present for all blocks.</div>
+    </div>
+  </div>
+
+  <div class="check">
+    <div class="check-icon check-pass"></div>
+    <div>
+      <div class="check-name">BBox Sanity</div>
+      <div class="check-detail">All bounding boxes structurally valid.</div>
+    </div>
+  </div>
+
+  <div class="check">
+    <div class="check-icon check-warn"></div>
+    <div>
+      <div class="check-name">Content vs Noise Ratio</div>
+      <div class="check-detail">6 content-like blocks, 2 secondary/noise candidate blocks.</div>
+      <div class="check-metrics">type_distribution: header=2, heading=1, paragraph=5</div>
+    </div>
+  </div>
+
+  <div class="check">
+    <div class="check-icon check-pass"></div>
+    <div>
+      <div class="check-name">Text Usefulness</div>
+      <div class="check-detail">No empty or very short text fragments detected.</div>
+    </div>
+  </div>
+
+  <div class="check">
+    <div class="check-icon check-pass"></div>
+    <div>
+      <div class="check-name">Text Extraction Health</div>
+      <div class="check-detail">Extracted text availability checks passed.</div>
+      <div style="margin-top: 8px;">
+        <div class="health-row"><span class="health-label">Text-bearing blocks</span><span class="health-value">8</span></div>
+        <div class="health-row"><span class="health-label">Non-empty text blocks</span><span class="health-value">8</span></div>
+        <div class="health-row"><span class="health-label">Total characters extracted</span><span class="health-value">5,040</span></div>
+        <div class="health-row"><span class="health-label">Empty text block ratio</span><span class="health-value">0.0%</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <h2>Noise / Layout Signals</h2>
+  <div class="signal-grid">
+    <div class="signal"><span class="signal-name">Table marker artifacts: </span><span class="signal-value">0</span></div>
+    <div class="signal"><span class="signal-name">Running furniture: </span><span class="signal-value">2</span></div>
+    <div class="signal"><span class="signal-name">Visual anchors: </span><span class="signal-value">0</span></div>
+    <div class="signal"><span class="signal-name">Ambiguous images: </span><span class="signal-value">0</span></div>
+  </div>
+  <div class="signal-detail">
+    running_furniture: p6-texts-58: type=header, text='Technologies 2019, 7, 65'<br>
+    running_furniture: p6-texts-59: type=header, text='6 of 19'
+  </div>
+</div>
+
+<div class="card">
+  <h2>Recommended Action</h2>
+  <div class="action-box">
+    Because the decision is <strong>REVIEW</strong>, inspect layout/noise signals before using this output for Markdown export, RAG ingestion preparation, or manual extraction. If the listed items are expected headers or footers, keep, exclude, or describe them according to your downstream use case.
+  </div>
+</div>
+
+    </div>
+  </div>
+
+  <div class="footer">
+    Illustrative documentation for the included page 6 example; authoritative output comes from the report CLI on your inputs.
+    <br><br>
+    Generated by <a href="https://github.com/MMoney1988/pdf-quality-report">pdf-quality-report</a> — deterministic quality checks for PDF parser output
+    <p class="footer-strip">Portfolio HTML — does not widen product claims; see repository README and publication policy.</p>
+  </div>
+</div>
+</body>
+</html>

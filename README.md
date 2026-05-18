@@ -143,6 +143,16 @@ The source PDF itself is not committed. See `examples/mdpi_pdf_elements/SOURCE.m
 
 The tests use small synthetic Docling-style JSON fixtures, not the committed MDPI example files.
 
+## Canonical visuals
+
+Documentation assets under `docs/` explain the pipeline and a sample report layout. They do not change runtime behavior or widen claims beyond this README (see [Publication policy](docs/publication_policy.md)).
+
+- [`docs/pqr_pipeline.svg`](docs/pqr_pipeline.svg) — flow from PDF input through Docling to normalized blocks, six checks, GO/REVIEW/BLOCK, and exports
+- [`docs/pqr_before_after.svg`](docs/pqr_before_after.svg) — illustrative raw parser JSON versus structured quality-report view
+- [`docs/sample_report.html`](docs/sample_report.html) — open locally in a browser for a formatted sample (page 6 example)
+
+**Portfolio layer** (same facts, presentation framing for proposals and embeds): [`docs/portfolio/README.md`](docs/portfolio/README.md).
+
 ## Example Report Output Excerpt
 
 The simplified excerpt below comes from page 12 of the included MDPI research-paper example. A block is one
