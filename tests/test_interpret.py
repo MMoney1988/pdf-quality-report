@@ -155,6 +155,40 @@ def test_text_extraction_health_warn_gets_conservative_explanation() -> None:
     assert report.decision == "REVIEW"
 
 
+def test_table_output_structure_warn_gets_conservative_explanation() -> None:
+    report = _report(
+        [
+            CheckResult(
+                "Table Output Structure Signals",
+                "WARN",
+                "1 table output structure warning(s)",
+                [
+                    "table_blocks=1",
+                    "structured_grid_blocks=0",
+                    "alternate_structure_signal_blocks=0",
+                    "text_structure_signal_blocks=0",
+                    "plain_text_only_blocks=1",
+                    "empty_or_short_table_text_blocks=0",
+                    "inconsistent_grid_blocks=0",
+                    "p6-tables-1: table block has plain text only and no obvious row/column structure signal "
+                    "(chars=72)",
+                ],
+            )
+        ]
+    )
+
+    bullets = interpret_quality_report(report)
+
+    assert any("Table Output Structure Signals is WARN" in bullet for bullet in bullets)
+    assert any("1 table-labeled normalized block" in bullet for bullet in bullets)
+    assert any("lack obvious structured table-output signals" in bullet for bullet in bullets)
+    assert any("does not validate table reconstruction correctness against the PDF" in bullet for bullet in bullets)
+    assert any("p6-tables-1" in bullet for bullet in bullets)
+    assert not any("failed" in bullet.lower() for bullet in bullets)
+    assert not any("accuracy" in bullet.lower() and "does not" not in bullet.lower() for bullet in bullets)
+    assert report.decision == "REVIEW"
+
+
 def test_bbox_failure_gets_failure_explanation_without_decision_change() -> None:
     report = _report(
         [

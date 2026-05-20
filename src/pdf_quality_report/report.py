@@ -15,6 +15,8 @@ from .models import CheckResult, NoiseLayoutSignals, QualityReport
 CHECK_RESULT_EXPLANATIONS = (
     "Each section below is a separate check.",
     "Required Field Coverage checks whether required JSON fields are present.",
+    "Table Output Structure Signals checks whether table-labeled normalized blocks contain visible table-output "
+    "structure signals.",
     "Provenance Completeness checks whether source, page, and bounding-box metadata is present.",
     "BBox Sanity checks whether bounding boxes look structurally valid.",
     "Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.",

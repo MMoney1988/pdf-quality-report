@@ -19,6 +19,7 @@ SHORT_TEXT_THRESHOLD = 3
 LOW_TEXT_CHAR_THRESHOLD = 40
 IMAGE_LOW_TEXT_CHAR_THRESHOLD = 120
 EMPTY_TEXT_BLOCK_RATIO_THRESHOLD = 0.5
+SHORT_TABLE_TEXT_THRESHOLD = 20
 
 TEXT_BODY_TYPES = {"heading", "paragraph", "list_item_text", "caption", "footnote", "table"}
 TEXT_BEARING_TYPES = TEXT_BODY_TYPES | {"header", "footer"}
@@ -46,6 +47,7 @@ def run_quality_checks(uif_document: dict[str, Any]) -> QualityReport:
     blocks = _blocks(uif_document)
     results = [
         check_required_field_coverage(uif_document),
+        check_table_output_structure(blocks),
         check_provenance_completeness(blocks),
         check_bbox_sanity(blocks),
         check_content_vs_noise_ratio(blocks),
@@ -138,6 +140,90 @@ def check_provenance_completeness(blocks: list[dict[str, Any]]) -> CheckResult:
         status = "PASS"
     summary = _summary_from_issues("provenance", failures, warnings)
     return CheckResult("Provenance Completeness", status, summary, [*failures, *warnings])
+
+
+def check_table_output_structure(blocks: list[dict[str, Any]]) -> CheckResult:
+    """Check visible table-output structure signals without judging table correctness."""
+    table_blocks = [
+        (index, block)
+        for index, block in enumerate(blocks)
+        if str(block.get("type", "unknown")) == "table"
+    ]
+    counts = Counter[str]()
+    warnings: list[str] = []
+
+    for index, block in table_blocks:
+        block_id = _block_id(block, index)
+        text = _content_text(block)
+        normalized_text = _normalize_text(text)
+        grid = _table_grid_signal(block)
+        has_grid_signal = _has_non_empty_grid(grid)
+        has_alternate_structured_signal = _has_alternate_table_structure_signal(block)
+        has_text_structure_signal = _has_table_text_structure_signal(text)
+
+        if has_grid_signal:
+            counts["structured_grid_blocks"] += 1
+        if has_alternate_structured_signal:
+            counts["alternate_structure_signal_blocks"] += 1
+        if has_text_structure_signal:
+            counts["text_structure_signal_blocks"] += 1
+
+        row_widths = _row_widths(grid)
+        if len(set(row_widths)) > 1:
+            counts["inconsistent_grid_blocks"] += 1
+            warnings.append(
+                f"{block_id}: table data_grid has inconsistent row widths: {_format_int_values(row_widths)}"
+            )
+
+        has_any_structure_signal = has_grid_signal or has_alternate_structured_signal or has_text_structure_signal
+        if not normalized_text and not has_any_structure_signal:
+            counts["empty_or_short_table_text_blocks"] += 1
+            warnings.append(f"{block_id}: table block has no structured table signal and no markdown text")
+        elif not has_any_structure_signal and len(normalized_text) <= SHORT_TABLE_TEXT_THRESHOLD:
+            counts["empty_or_short_table_text_blocks"] += 1
+            warnings.append(
+                f"{block_id}: table block has very short table text and no obvious row/column structure signal "
+                f"(chars={len(normalized_text)})"
+            )
+        elif not has_any_structure_signal:
+            counts["plain_text_only_blocks"] += 1
+            warnings.append(
+                f"{block_id}: table block has plain text only and no obvious row/column structure signal "
+                f"(chars={len(normalized_text)})"
+            )
+        elif has_grid_signal and not normalized_text:
+            counts["empty_or_short_table_text_blocks"] += 1
+            warnings.append(f"{block_id}: table block has structured grid signal but empty markdown content.text")
+
+    details = [
+        f"table_blocks={len(table_blocks)}",
+        f"structured_grid_blocks={counts['structured_grid_blocks']}",
+        f"alternate_structure_signal_blocks={counts['alternate_structure_signal_blocks']}",
+        f"text_structure_signal_blocks={counts['text_structure_signal_blocks']}",
+        f"plain_text_only_blocks={counts['plain_text_only_blocks']}",
+        f"empty_or_short_table_text_blocks={counts['empty_or_short_table_text_blocks']}",
+        f"inconsistent_grid_blocks={counts['inconsistent_grid_blocks']}",
+    ]
+    if not table_blocks:
+        return CheckResult(
+            "Table Output Structure Signals",
+            "PASS",
+            "no table-labeled blocks found",
+            [*details, "table_blocks=0; no table-labeled blocks found"],
+        )
+    if warnings:
+        return CheckResult(
+            "Table Output Structure Signals",
+            "WARN",
+            f"{len(warnings)} table output structure warning(s)",
+            [*details, *warnings],
+        )
+    return CheckResult(
+        "Table Output Structure Signals",
+        "PASS",
+        "table-labeled blocks include visible structure signals",
+        details,
+    )
 
 
 def check_bbox_sanity(blocks: list[dict[str, Any]]) -> CheckResult:
@@ -364,6 +450,78 @@ def _content_text(block: dict[str, Any]) -> str:
 
 def _normalize_text(text: str) -> str:
     return re.sub(r"\s+", " ", text).strip()
+
+
+def _table_grid_signal(block: dict[str, Any]) -> list[list[str]]:
+    for value in (
+        block.get("data_grid"),
+        _dict_or_empty(block.get("content")).get("data_grid"),
+        _dict_or_empty(block.get("content")).get("rows"),
+        block.get("rows"),
+    ):
+        grid = _coerce_grid(value)
+        if grid:
+            return grid
+    return []
+
+
+def _coerce_grid(value: Any) -> list[list[str]]:
+    if not isinstance(value, list):
+        return []
+    rows: list[list[str]] = []
+    for row in value:
+        if isinstance(row, list):
+            rows.append([_cell_text(cell) for cell in row])
+    return rows
+
+
+def _cell_text(value: Any) -> str:
+    if isinstance(value, dict):
+        text = value.get("text")
+        return text if isinstance(text, str) else ""
+    return str(value) if value is not None else ""
+
+
+def _has_non_empty_grid(grid: list[list[str]]) -> bool:
+    return any(cell.strip() for row in grid for cell in row)
+
+
+def _has_alternate_table_structure_signal(block: dict[str, Any]) -> bool:
+    content = _dict_or_empty(block.get("content"))
+    return (
+        _has_non_empty_cells(block.get("cells"))
+        or _has_non_empty_cells(content.get("cells"))
+        or _has_non_empty_html(block.get("html"))
+        or _has_non_empty_html(content.get("html"))
+    )
+
+
+def _has_non_empty_cells(value: Any) -> bool:
+    if not isinstance(value, list):
+        return False
+    return any(_cell_text(cell).strip() for cell in value)
+
+
+def _has_non_empty_html(value: Any) -> bool:
+    return isinstance(value, str) and bool(value.strip())
+
+
+def _has_table_text_structure_signal(text: str) -> bool:
+    if "\t" in text or "|" in text:
+        return True
+    lines = [line.strip() for line in text.splitlines() if line.strip()]
+    if len(lines) < 2:
+        return False
+    column_counts = [len(re.split(r"\s{2,}", line)) for line in lines]
+    return min(column_counts) > 1 and len(set(column_counts)) == 1
+
+
+def _row_widths(grid: list[list[str]]) -> list[int]:
+    return [len(row) for row in grid if row]
+
+
+def _format_int_values(values: list[int]) -> str:
+    return ", ".join(str(value) for value in sorted(set(values)))
 
 
 def _block_id(block: dict[str, Any], index: int) -> str:

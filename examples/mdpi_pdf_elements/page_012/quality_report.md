@@ -40,6 +40,7 @@ Details:
 Each section below is a separate check.
 
 - Required Field Coverage checks whether required JSON fields are present.
+- Table Output Structure Signals checks whether table-labeled normalized blocks contain visible table-output structure signals.
 - Provenance Completeness checks whether source, page, and bounding-box metadata is present.
 - BBox Sanity checks whether bounding boxes look structurally valid.
 - Content vs Noise Ratio checks how much extracted content looks like main text versus layout/noise.
@@ -50,6 +51,20 @@ Each section below is a separate check.
 PASS
 
 all required fields present
+
+## Table Output Structure Signals
+PASS
+
+no table-labeled blocks found
+
+- table_blocks=0
+- structured_grid_blocks=0
+- alternate_structure_signal_blocks=0
+- text_structure_signal_blocks=0
+- plain_text_only_blocks=0
+- empty_or_short_table_text_blocks=0
+- inconsistent_grid_blocks=0
+- table_blocks=0; no table-labeled blocks found
 
 ## Provenance Completeness
 PASS

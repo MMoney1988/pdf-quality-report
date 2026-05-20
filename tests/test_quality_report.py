@@ -43,6 +43,18 @@ def _valid_block(block_id: str, block_type: str = "paragraph") -> dict:
     return block
 
 
+def _table_block(
+    block_id: str,
+    *,
+    text: str = "| A | B |\n| --- | --- |\n| 1 | 2 |",
+    data_grid: list[list[str]] | None = None,
+) -> dict:
+    block = _valid_block(block_id, "table")
+    block["content"]["text"] = text
+    block["data_grid"] = data_grid if data_grid is not None else [["A", "B"], ["1", "2"]]
+    return block
+
+
 def test_quality_checks_pass_hard_checks_and_warn_for_noise() -> None:
     body = _valid_block("p6-texts-48")
     header = _valid_block("p6-texts-45", "header")
@@ -53,6 +65,7 @@ def test_quality_checks_pass_hard_checks_and_warn_for_noise() -> None:
 
     statuses = {result.name: result.status for result in report.results}
     assert statuses["Required Field Coverage"] == "PASS"
+    assert statuses["Table Output Structure Signals"] == "PASS"
     assert statuses["Provenance Completeness"] == "PASS"
     assert statuses["BBox Sanity"] == "PASS"
     assert statuses["Content vs Noise Ratio"] == "WARN"
@@ -60,6 +73,91 @@ def test_quality_checks_pass_hard_checks_and_warn_for_noise() -> None:
     assert report.hard_failures == 0
     assert report.warnings == 1
     assert report.decision == "REVIEW"
+
+
+def test_table_output_structure_passes_without_table_blocks() -> None:
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [_valid_block("p6-texts-48")]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "PASS"
+    assert table_check.summary == "no table-labeled blocks found"
+    assert "table_blocks=0" in table_check.details
+    assert "table_blocks=0; no table-labeled blocks found" in table_check.details
+
+
+def test_table_output_structure_passes_for_structured_data_grid() -> None:
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [_table_block("p6-tables-1")]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "PASS"
+    assert table_check.summary == "table-labeled blocks include visible structure signals"
+    assert "table_blocks=1" in table_check.details
+    assert "structured_grid_blocks=1" in table_check.details
+
+
+def test_table_output_structure_accepts_optional_rows_signal() -> None:
+    table = _table_block("p6-tables-1", text="A B C", data_grid=[])
+    table["content"]["rows"] = [["A", "B"], ["1", "2"]]
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [table]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "PASS"
+    assert "structured_grid_blocks=1" in table_check.details
+
+
+def test_table_output_structure_warns_for_plain_text_only_without_hard_failure() -> None:
+    table = _table_block(
+        "p6-tables-1",
+        text="This table-labeled block appears as one plain paragraph without obvious columns.",
+        data_grid=[],
+    )
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [table]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "WARN"
+    assert "plain_text_only_blocks=1" in table_check.details
+    assert any("plain text only and no obvious row/column structure signal" in detail for detail in table_check.details)
+    assert report.hard_failures == 0
+    assert report.decision == "REVIEW"
+
+
+def test_table_output_structure_warns_for_inconsistent_grid_widths() -> None:
+    table = _table_block("p6-tables-1", data_grid=[["A", "B"], ["1"]])
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [table]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "WARN"
+    assert "inconsistent_grid_blocks=1" in table_check.details
+    assert "p6-tables-1: table data_grid has inconsistent row widths: 1, 2" in table_check.details
+    assert report.hard_failures == 0
+
+
+def test_table_output_structure_passes_for_text_structure_signal() -> None:
+    table = _table_block("p6-tables-1", text="A\tB\n1\t2", data_grid=[])
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [table]})
+
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert table_check.status == "PASS"
+    assert "text_structure_signal_blocks=1" in table_check.details
+
+
+def test_table_output_structure_does_not_replace_required_field_failures() -> None:
+    table = _table_block("p6-tables-1")
+    del table["data_grid"]
+
+    report = run_quality_checks({"metadata": {"source": "test"}, "blocks": [table]})
+
+    required = next(result for result in report.results if result.name == "Required Field Coverage")
+    table_check = next(result for result in report.results if result.name == "Table Output Structure Signals")
+    assert required.status == "FAIL"
+    assert "p6-tables-1: table missing data_grid" in required.details
+    assert table_check.status == "PASS"
+    assert table_check.status != "FAIL"
+    assert report.hard_failures == 1
 
 
 def test_quality_checks_fail_missing_required_field() -> None:
@@ -236,8 +334,10 @@ def test_markdown_report_contains_required_sections() -> None:
     assert markdown.index("## Noise / Layout Signals") < markdown.index("## Check Results")
     assert "table_marker_artifacts: 1" in markdown
     assert "## Required Field Coverage" in markdown
+    assert "## Table Output Structure Signals" in markdown
     assert "## Text Usefulness" in markdown
     assert "## Text Extraction Health" in markdown
+    assert "Table Output Structure Signals checks whether table-labeled normalized blocks contain visible" in markdown
     assert "Text Extraction Health checks extracted-text availability, not extracted-text correctness." in markdown
 
 
@@ -269,3 +369,22 @@ def test_cli_exits_zero_when_only_text_extraction_health_warns(tmp_path: Path) -
     assert "decision: REVIEW" in report_text
     assert "## Text Extraction Health" in report_text
     assert "no_text_bearing_blocks: document has blocks but no text-bearing blocks" in report_text
+
+
+def test_cli_exits_zero_when_only_table_output_structure_warns(tmp_path: Path) -> None:
+    uif_path = tmp_path / "uif.json"
+    report_path = tmp_path / "quality_report.md"
+    table = _table_block(
+        "p6-tables-1",
+        text="This table-labeled block appears as one plain paragraph without obvious columns.",
+        data_grid=[],
+    )
+    uif_path.write_text(json.dumps({"metadata": {}, "blocks": [table]}), encoding="utf-8")
+
+    assert main(["--input", str(uif_path), "--output", str(report_path)]) == 0
+
+    report_text = report_path.read_text(encoding="utf-8")
+    assert "hard_failures: 0" in report_text
+    assert "decision: REVIEW" in report_text
+    assert "## Table Output Structure Signals" in report_text
+    assert "plain text only and no obvious row/column structure signal" in report_text

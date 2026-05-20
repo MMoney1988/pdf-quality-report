@@ -43,6 +43,8 @@ def _interpret_result(result: CheckResult, signals: NoiseLayoutSignals) -> list[
         return _interpret_text_usefulness(result)
     if result.name == "Text Extraction Health":
         return _interpret_text_extraction_health(result)
+    if result.name == "Table Output Structure Signals":
+        return _interpret_table_output_structure(result)
     if result.name == "Content vs Noise Ratio":
         return _interpret_content_vs_noise(result, signals)
     if result.name == "BBox Sanity":
@@ -163,6 +165,52 @@ def _interpret_text_extraction_health(result: CheckResult) -> list[str]:
     return bullets
 
 
+def _interpret_table_output_structure(result: CheckResult) -> list[str]:
+    counts = _detail_counts(result.details)
+    table_blocks = counts.get("table_blocks")
+    plain_text_only_blocks = counts.get("plain_text_only_blocks")
+    empty_or_short_blocks = counts.get("empty_or_short_table_text_blocks")
+    inconsistent_grid_blocks = counts.get("inconsistent_grid_blocks")
+
+    if table_blocks is None:
+        return [
+            f"{result.name} is {result.status}: {result.summary}. "
+            "This check reviews table-output structure signals in normalized blocks; it does not judge table "
+            "correctness."
+        ]
+
+    issue_counts = [
+        count
+        for count in (plain_text_only_blocks, empty_or_short_blocks, inconsistent_grid_blocks)
+        if count is not None and count > 0
+    ]
+    bullets = [
+        _table_output_structure_count_bullet(result, table_blocks)
+    ]
+    if issue_counts:
+        bullets.append(
+            "Some table-labeled blocks lack obvious structured table-output signals or have inconsistent row-width "
+            "signals in the normalized parser output."
+        )
+    bullets.append(
+        "This check does not validate table reconstruction correctness against the PDF, infer PDF ground truth, "
+        "or judge parser accuracy."
+    )
+    examples = _warning_detail_examples(result.details)
+    if examples:
+        bullets.append(f"Examples: {examples}.")
+    return bullets
+
+
+def _table_output_structure_count_bullet(result: CheckResult, table_blocks: int) -> str:
+    if table_blocks == 0:
+        return f"{result.name} is {result.status}: There are no table-labeled normalized blocks to review."
+    return (
+        f"{result.name} is {result.status}: This report found {table_blocks} table-labeled normalized "
+        f"{_plural(table_blocks, 'block')}."
+    )
+
+
 def _interpret_generic_result(result: CheckResult) -> str:
     examples = _detail_examples(result.details)
     suffix = f" Examples: {examples}." if examples else ""
@@ -194,6 +242,11 @@ def _interpret_noise_layout_signals(signals: NoiseLayoutSignals) -> list[str]:
     if ambiguous_ids:
         bullets.extend(_ambiguous_image_bullets(signals.ambiguous_image_blocks))
     return bullets
+
+
+def _warning_detail_examples(details: list[str], limit: int = 2) -> str:
+    warning_details = [detail for detail in details if ": " in detail]
+    return "; ".join(warning_details[:limit])
 
 
 def _detail_examples(details: list[str], limit: int = 2) -> str:
