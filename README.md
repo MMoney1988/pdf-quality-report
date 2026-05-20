@@ -16,23 +16,28 @@ Technical note: the traceable output is plain JSON. It is inspired by UIF, an in
 
 ## What The Report Checks
 
-The report answers three practical questions:
+The report answers practical questions such as:
 
 1. Does every extracted block have the basic fields a pipeline needs?
 2. Can each block be traced back to a source page and bounding box?
 3. Does the page contain layout noise that a human should review before using the output?
 
-The six current checks are:
+The seven current checks are:
 
 1. Required field coverage: are core fields such as `id`, `type`, `page_number`, `bbox`, and `reading_order_index` present?
-2. Provenance completeness: can each block be traced back to Docling metadata and the source PDF?
-3. BBox sanity: are bounding boxes present, finite, and ordered correctly?
-4. Content vs noise ratio: how much looks like document content compared with headers, footers, images, or other secondary blocks?
-5. Text usefulness: are text blocks empty, suspiciously short, or duplicated?
-6. Text extraction health: is extracted text available in the normalized blocks for review, without judging whether the text is correct?
+2. Table output structure signals: do table-labeled normalized blocks contain visible table-output structure signals?
+3. Provenance completeness: can each block be traced back to Docling metadata and the source PDF?
+4. BBox sanity: are bounding boxes present, finite, and ordered correctly?
+5. Content vs noise ratio: how much looks like document content compared with headers, footers, images, or other secondary blocks?
+6. Text usefulness: are text blocks empty, suspiciously short, or duplicated?
+7. Text extraction health: is extracted text available in the normalized blocks for review, without judging whether the text is correct?
 
 Text usefulness flags local text-quality issues such as empty body blocks, very short text, or repeated fragments.
 Text extraction health summarizes whether the document contains enough extracted text overall for review.
+The table output structure signal check flags table-labeled normalized blocks that lack obvious structured table-output
+signals; it does not validate table reconstruction correctness against the PDF.
+Structured table-output signals include normalized grid fields such as `data_grid` or `rows`, optional `cells` / `html`,
+or delimiter-like `content.text`.
 
 Warning-only checks can move the report to `REVIEW`; the report CLI still exits non-zero only for hard failures.
 
