@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import sys
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -11,9 +12,10 @@ from json import JSONDecodeError
 from pathlib import Path
 from typing import Any
 
-SCHEMA_VERSION = "chunk_record_v0"
+SCHEMA_VERSION = "chunk_record_v1"
 DEFAULT_MAX_CHARS = 1800
 SHORT_TEXT_THRESHOLD = 3
+HEADING_NUMBER_RE = re.compile(r"^\s*(\d+(?:\.\d+)*)(?:\.)?\s+")
 
 CONTENT_TYPES = {"heading", "paragraph", "list_item_text", "caption", "footnote", "table"}
 NOISE_TYPES = {"header", "footer"}
@@ -53,6 +55,14 @@ class _ExportBlock:
     reading_order_index: int | None
     input_index: int
     text: str
+    heading_level: int | None = None
+
+
+@dataclass(frozen=True)
+class _SectionHeading:
+    text: str
+    block_id: str
+    level: int
 
 
 @dataclass(frozen=True)
@@ -126,29 +136,25 @@ def build_chunk_records(document: NormalizedDocument, options: ChunkOptions | No
     source_pdf_hash = _source_pdf_hash(document)
     records: list[ChunkRecord] = []
     current_blocks: list[_ExportBlock] = []
-    current_heading: str | None = None
-    current_heading_block_id: str | None = None
+    heading_stack: list[_SectionHeading] = []
 
     for block in _export_blocks(document.blocks, resolved_options):
         if block.block_type == "heading":
             _append_record(
                 records,
                 current_blocks,
-                section_heading=current_heading,
-                section_heading_block_id=current_heading_block_id,
+                heading_stack=heading_stack,
                 source_identifier=source_identifier,
                 source_pdf_hash=source_pdf_hash,
             )
             current_blocks = []
-            current_heading = block.text
-            current_heading_block_id = block.block_id
+            heading_stack = _updated_heading_stack(heading_stack, block)
 
         if _would_exceed_max_chars(current_blocks, block, resolved_options.max_chars):
             _append_record(
                 records,
                 current_blocks,
-                section_heading=current_heading,
-                section_heading_block_id=current_heading_block_id,
+                heading_stack=heading_stack,
                 source_identifier=source_identifier,
                 source_pdf_hash=source_pdf_hash,
             )
@@ -159,8 +165,7 @@ def build_chunk_records(document: NormalizedDocument, options: ChunkOptions | No
     _append_record(
         records,
         current_blocks,
-        section_heading=current_heading,
-        section_heading_block_id=current_heading_block_id,
+        heading_stack=heading_stack,
         source_identifier=source_identifier,
         source_pdf_hash=source_pdf_hash,
     )
@@ -291,6 +296,7 @@ def _to_export_block(block: dict[str, Any], input_index: int, options: ChunkOpti
         reading_order_index=_int_or_none(block.get("reading_order_index")),
         input_index=input_index,
         text=text,
+        heading_level=_heading_level(block, text) if block_type == "heading" else None,
     )
 
 
@@ -298,8 +304,7 @@ def _append_record(
     records: list[ChunkRecord],
     blocks: list[_ExportBlock],
     *,
-    section_heading: str | None,
-    section_heading_block_id: str | None,
+    heading_stack: Sequence[_SectionHeading],
     source_identifier: str,
     source_pdf_hash: str,
 ) -> None:
@@ -307,6 +312,11 @@ def _append_record(
         return
 
     chunk_id = f"chunk-{blocks[0].block_id}"
+    section_path = [heading.text for heading in heading_stack]
+    section_path_block_ids = [heading.block_id for heading in heading_stack]
+    section_heading = section_path[-1] if section_path else None
+    section_heading_block_id = section_path_block_ids[-1] if section_path_block_ids else None
+    page_numbers = _page_numbers(blocks)
     records.append(
         ChunkRecord(
             doc_id=chunk_id,
@@ -315,15 +325,30 @@ def _append_record(
                 "schema_version": SCHEMA_VERSION,
                 "chunk_id": chunk_id,
                 "block_ids": [block.block_id for block in blocks],
-                "page_numbers": _page_numbers(blocks),
+                "page_numbers": page_numbers,
                 "section_heading": section_heading,
                 "section_heading_block_id": section_heading_block_id,
+                "section_path": section_path,
+                "section_path_block_ids": section_path_block_ids,
+                "citation": _citation(source_identifier, page_numbers, section_heading),
                 "source_identifier": source_identifier,
                 "source_pdf_hash": source_pdf_hash,
                 "bbox_refs": [_bbox_ref(block) for block in blocks],
             },
         )
     )
+
+
+def _updated_heading_stack(
+    heading_stack: Sequence[_SectionHeading],
+    heading_block: _ExportBlock,
+) -> list[_SectionHeading]:
+    level = heading_block.heading_level or 1
+    retained_headings = [heading for heading in heading_stack if heading.level < level]
+    return [
+        *retained_headings,
+        _SectionHeading(text=heading_block.text, block_id=heading_block.block_id, level=level),
+    ]
 
 
 def _would_exceed_max_chars(current_blocks: list[_ExportBlock], next_block: _ExportBlock, max_chars: int) -> bool:
@@ -340,6 +365,46 @@ def _page_numbers(blocks: Sequence[_ExportBlock]) -> list[int]:
     return sorted({block.page_number for block in blocks if block.page_number is not None})
 
 
+def _citation(source_identifier: str, page_numbers: Sequence[int], section_heading: str | None) -> str:
+    if not page_numbers:
+        return source_identifier
+
+    citation = f"{source_identifier}, {_formatted_pages(page_numbers)}"
+    if section_heading:
+        citation = f"{citation}, §{section_heading}"
+    return citation
+
+
+def _formatted_pages(page_numbers: Sequence[int]) -> str:
+    unique_pages = sorted(set(page_numbers))
+    if len(unique_pages) == 1:
+        return f"p.{unique_pages[0]}"
+    return f"pp.{_formatted_page_ranges(unique_pages)}"
+
+
+def _formatted_page_ranges(page_numbers: Sequence[int]) -> str:
+    ranges: list[str] = []
+    range_start = page_numbers[0]
+    previous_page = page_numbers[0]
+
+    for page_number in page_numbers[1:]:
+        if page_number == previous_page + 1:
+            previous_page = page_number
+            continue
+        ranges.append(_format_page_range(range_start, previous_page))
+        range_start = page_number
+        previous_page = page_number
+
+    ranges.append(_format_page_range(range_start, previous_page))
+    return ", ".join(ranges)
+
+
+def _format_page_range(start_page: int, end_page: int) -> str:
+    if start_page == end_page:
+        return str(start_page)
+    return f"{start_page}-{end_page}"
+
+
 def _bbox_ref(block: _ExportBlock) -> dict[str, Any]:
     return {
         "block_id": block.block_id,
@@ -354,6 +419,17 @@ def _content_text(block: dict[str, Any]) -> str:
         return ""
     text = content.get("text")
     return text if isinstance(text, str) else ""
+
+
+def _heading_level(block: dict[str, Any], text: str) -> int:
+    explicit_level = _int_or_none(block.get("level"))
+    if explicit_level is not None and explicit_level > 0:
+        return explicit_level
+
+    match = HEADING_NUMBER_RE.match(text)
+    if match:
+        return match.group(1).count(".") + 1
+    return 1
 
 
 def _source_identifier(document: NormalizedDocument) -> str:

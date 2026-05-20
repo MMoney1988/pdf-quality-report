@@ -110,8 +110,9 @@ pdf-quality-markdown \
 
 ## Export Chunk Records
 
-Export normalized blocks to JSONL chunk records with block IDs, page numbers, bounding-box references, and source metadata
-preserved for downstream review or retrieval-oriented preparation:
+Export normalized blocks to JSONL chunk records with block IDs, page numbers, bounding-box references, heading context,
+source metadata, and citation-style display strings preserved for downstream review or lightweight retrieval-oriented
+experiments:
 
 ```bash
 python -m pdf_quality_report.chunk \
