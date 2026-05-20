@@ -131,6 +131,28 @@ pdf-quality-chunk \
   --output /tmp/page_006_chunks.jsonl
 ```
 
+## Export Chunk Review Markdown
+
+Build and render chunk records from normalized blocks as human-reviewable Markdown with source references and heading
+context:
+
+```bash
+python -m pdf_quality_report.chunk_review \
+  --input examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --output /tmp/page_006_chunk_review.md
+```
+
+Use `--out` as a short alias for `--output`. See [Export Chunk Review Markdown](docs/how_to_export_chunk_review_markdown.md)
+for a short walkthrough.
+
+If the package entry point is installed:
+
+```bash
+pdf-quality-chunk-review \
+  --input examples/mdpi_pdf_elements/page_006/normalized_blocks.json \
+  --output /tmp/page_006_chunk_review.md
+```
+
 ## Included Examples
 
 This repository includes derived example outputs for page 6 and page 12 of the sample article:
