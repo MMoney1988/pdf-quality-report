@@ -93,6 +93,31 @@ python -m pdf_quality_report.report \
   --output examples/mdpi_pdf_elements/page_006/quality_report.md
 ```
 
+## Export Review Findings
+
+Export WARN and FAIL quality-check details as a human-reviewable findings list with source context when available:
+
+```bash
+python -m pdf_quality_report.review_findings \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output /tmp/page_012_review_findings.md
+```
+
+Use `--out` as a short alias for `--output`. See [Export Review Findings](docs/how_to_export_review_findings.md)
+for a short walkthrough.
+
+`review_findings` counts WARN/FAIL detail items, or one check-level item when a warning or failure only has
+metric-style details. It is not the number of WARN/FAIL checks. The command exits with `0` when the Markdown file is
+written successfully, even if review findings exist; input or output errors return `1`.
+
+If the package entry point is installed:
+
+```bash
+pdf-quality-review-findings \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output /tmp/page_012_review_findings.md
+```
+
 ## Export Clean Markdown
 
 Export normalized blocks to clean Markdown with source reference comments for downstream review or retrieval-oriented preparation:
