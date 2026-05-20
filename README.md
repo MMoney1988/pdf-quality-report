@@ -118,6 +118,31 @@ pdf-quality-review-findings \
   --output /tmp/page_012_review_findings.md
 ```
 
+## Export Review Bundle
+
+Export a static folder with the quality report, review findings, clean Markdown, chunk records, and chunk review
+Markdown:
+
+```bash
+python -m pdf_quality_report.review_bundle \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output-dir /tmp/page_012_pqr_review_bundle
+```
+
+The command exits with `0` when all bundle files are written, even if the report decision is `REVIEW` or `BLOCK`.
+Input or output errors return `1`. See [Export Review Bundle](docs/how_to_export_review_bundle.md) for a short
+walkthrough.
+
+Use `--out-dir` as a short alias for `--output-dir`.
+
+If the package entry point is installed:
+
+```bash
+pdf-quality-review-bundle \
+  --input examples/mdpi_pdf_elements/page_012/normalized_blocks.json \
+  --output-dir /tmp/page_012_pqr_review_bundle
+```
+
 ## Export Clean Markdown
 
 Export normalized blocks to clean Markdown with source reference comments for downstream review or retrieval-oriented preparation:

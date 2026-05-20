@@ -30,6 +30,7 @@ pdf-quality-markdown = "pdf_quality_report.to_markdown:main"
 pdf-quality-chunk = "pdf_quality_report.chunk:main"
 pdf-quality-chunk-review = "pdf_quality_report.chunk_review:main"
 pdf-quality-review-findings = "pdf_quality_report.review_findings:main"
+pdf-quality-review-bundle = "pdf_quality_report.review_bundle:main"
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
