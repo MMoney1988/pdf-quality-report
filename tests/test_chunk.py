@@ -20,8 +20,9 @@ def _block(
     page_number: int = 6,
     reading_order_index: int = 0,
     bbox: list[float] | None = None,
+    level: int | None = None,
 ) -> dict:
-    return {
+    block = {
         "id": block_id,
         "type": block_type,
         "page_number": page_number,
@@ -42,6 +43,9 @@ def _block(
             "source_pdf_hash": "fallback-hash",
         },
     }
+    if level is not None:
+        block["level"] = level
+    return block
 
 
 def _document(blocks: list[dict], metadata: dict | None = None) -> NormalizedDocument:
@@ -69,7 +73,7 @@ def test_jsonl_record_contains_required_shape(tmp_path: Path) -> None:
     assert set(line) == {"doc_id", "text", "meta"}
     assert line["doc_id"] == "chunk-p6-texts-62"
     assert line["text"] == "4. Problem Definition"
-    assert line["meta"]["schema_version"] == "chunk_record_v0"
+    assert line["meta"]["schema_version"] == "chunk_record_v1"
     assert line["meta"]["chunk_id"] == line["doc_id"]
 
 
@@ -88,7 +92,88 @@ def test_paragraphs_are_grouped_under_nearest_heading() -> None:
     assert records[0].text == "4. Problem Definition\n\nFirst paragraph.\n\nSecond paragraph."
     assert records[0].meta["section_heading"] == "4. Problem Definition"
     assert records[0].meta["section_heading_block_id"] == "p6-texts-62"
+    assert records[0].meta["section_path"] == ["4. Problem Definition"]
+    assert records[0].meta["section_path_block_ids"] == ["p6-texts-62"]
     assert records[0].meta["block_ids"] == ["p6-texts-62", "p6-texts-63", "p6-texts-64"]
+
+
+def test_nested_headings_create_section_path() -> None:
+    records = build_chunk_records(
+        _document(
+            [
+                _block("p6-texts-62", "heading", "4. Problem Definition", level=1, reading_order_index=1),
+                _block("p6-texts-63", "paragraph", "Root paragraph.", reading_order_index=2),
+                _block("p6-texts-64", "heading", "4.1 Architecture", level=2, reading_order_index=3),
+                _block("p6-texts-65", "paragraph", "Nested paragraph.", reading_order_index=4),
+                _block("p6-texts-66", "heading", "4.1.1 Detail", level=3, reading_order_index=5),
+                _block("p6-texts-67", "paragraph", "Deep paragraph.", reading_order_index=6),
+            ]
+        )
+    )
+
+    assert [record.meta["section_path"] for record in records] == [
+        ["4. Problem Definition"],
+        ["4. Problem Definition", "4.1 Architecture"],
+        ["4. Problem Definition", "4.1 Architecture", "4.1.1 Detail"],
+    ]
+    assert records[2].meta["section_path_block_ids"] == ["p6-texts-62", "p6-texts-64", "p6-texts-66"]
+
+
+def test_heading_level_field_takes_precedence_over_regex() -> None:
+    records = build_chunk_records(
+        _document(
+            [
+                _block("p6-texts-62", "heading", "4. Problem Definition", level=1, reading_order_index=1),
+                _block("p6-texts-63", "heading", "4.1 Looks Nested But Is Top Level", level=1, reading_order_index=2),
+                _block("p6-texts-64", "paragraph", "Paragraph.", reading_order_index=3),
+            ]
+        )
+    )
+
+    assert records[1].meta["section_path"] == ["4.1 Looks Nested But Is Top Level"]
+
+
+def test_numbered_heading_regex_fallback_sets_nested_levels() -> None:
+    records = build_chunk_records(
+        _document(
+            [
+                _block("p6-texts-62", "heading", "4. Problem Definition", reading_order_index=1),
+                _block("p6-texts-63", "heading", "4.1 Architecture", reading_order_index=2),
+                _block("p6-texts-64", "heading", "4.1.2 Detail", reading_order_index=3),
+                _block("p6-texts-65", "paragraph", "Paragraph.", reading_order_index=4),
+            ]
+        )
+    )
+
+    assert records[-1].meta["section_path"] == [
+        "4. Problem Definition",
+        "4.1 Architecture",
+        "4.1.2 Detail",
+    ]
+
+
+def test_unnumbered_heading_defaults_to_level_one() -> None:
+    records = build_chunk_records(
+        _document(
+            [
+                _block("p6-texts-62", "heading", "4. Problem Definition", level=1, reading_order_index=1),
+                _block("p6-texts-63", "heading", "Unnumbered Heading", reading_order_index=2),
+                _block("p6-texts-64", "paragraph", "Paragraph.", reading_order_index=3),
+            ]
+        )
+    )
+
+    assert records[1].meta["section_path"] == ["Unnumbered Heading"]
+
+
+def test_chunk_without_heading_context_gets_empty_section_path() -> None:
+    records = build_chunk_records(_document([_block("p6-texts-63", "paragraph", "Paragraph.")]))
+
+    assert records[0].meta["section_heading"] is None
+    assert records[0].meta["section_heading_block_id"] is None
+    assert records[0].meta["section_path"] == []
+    assert records[0].meta["section_path_block_ids"] == []
+    assert records[0].meta["citation"] == "sample.pdf, p.6"
 
 
 def test_long_sections_split_only_at_block_boundaries() -> None:
@@ -108,8 +193,10 @@ def test_long_sections_split_only_at_block_boundaries() -> None:
         ["p6-texts-64"],
     ]
     assert records[0].text == "Section\n\nAlpha words"
+    assert records[0].meta["section_path"] == ["Section"]
     assert records[1].text == "Beta words"
     assert records[1].meta["section_heading"] == "Section"
+    assert records[1].meta["section_path"] == ["Section"]
 
 
 def test_blocks_are_sorted_by_page_reading_order_then_input_order() -> None:
@@ -180,6 +267,9 @@ def test_provenance_fields_are_preserved() -> None:
     assert meta["page_numbers"] == [6, 7]
     assert meta["source_identifier"] == "article.pdf"
     assert meta["source_pdf_hash"] == "hash-123"
+    assert meta["section_path"] == ["Section"]
+    assert meta["section_path_block_ids"] == ["p6-texts-62"]
+    assert meta["citation"] == "article.pdf, pp.6-7, §Section"
     assert meta["bbox_refs"] == [
         {"block_id": "p6-texts-62", "page_number": 6, "bbox": [1.0, 2.0, 3.0, 4.0]},
         {"block_id": "p7-texts-70", "page_number": 7, "bbox": [5.0, 6.0, 7.0, 8.0]},
@@ -266,6 +356,21 @@ def test_table_exports_only_existing_content_text() -> None:
     assert records[0].meta["block_ids"] == ["p6-tables-1"]
 
 
+def test_citation_formats_non_contiguous_page_ranges() -> None:
+    records = build_chunk_records(
+        _document(
+            [
+                _block("p6-texts-62", "heading", "Section", page_number=6, reading_order_index=1),
+                _block("p7-texts-63", "paragraph", "Continued.", page_number=7, reading_order_index=2),
+                _block("p9-texts-64", "paragraph", "Later.", page_number=9, reading_order_index=3),
+            ],
+            metadata={"source_identifier": "article.pdf", "source_pdf_hash": "hash-123"},
+        )
+    )
+
+    assert records[0].meta["citation"] == "article.pdf, pp.6-7, 9, §Section"
+
+
 def test_cli_out_alias_writes_chunk_records(tmp_path: Path) -> None:
     input_path = tmp_path / "blocks.json"
     output_path = tmp_path / "chunks.jsonl"
@@ -317,5 +422,5 @@ def test_cli_exports_page_006_and_page_012_examples(tmp_path: Path) -> None:
         assert result == 0
         lines = _json_lines(output_path)
         assert lines
-        assert all(line["meta"]["schema_version"] == "chunk_record_v0" for line in lines)
+        assert all(line["meta"]["schema_version"] == "chunk_record_v1" for line in lines)
         assert all(line["doc_id"] == line["meta"]["chunk_id"] for line in lines)
